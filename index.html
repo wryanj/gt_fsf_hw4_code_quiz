@@ -23,7 +23,7 @@
         <!--(Main Container) This is the Container For The Page Content Beneath The NavBar Header-->
         <main class="container mb-3 flex-shrink-0">
 
-            <!--(Get Scores and Timer) This is The Row Containing the Right Justified Countdown Clock, and The Left Justified Get Highscore Link-->
+            <!--Timer Bar and High Score Button- Always Visible-->
             <div class = "row mb-4">
                 <div class = "col-md">
     
@@ -38,20 +38,18 @@
                 </div>
             </div>
 
-            <!--(Welcome Screen and Start Button) This is The Row That Is displayed to Start-->
+            <!--Welcome Screen and Start Button- Variable Display-->
             <div class = "row mb-4" id="welcomeScreenContainer">
-
                 <div class = "col-md">
-                    <p class="myBold mx-auto">Welcome to the Code Quiz! Press the Start Button when your ready.</p>
+                    <p class="myBold text-center">Welcome to the Code Quiz! Press the Start Button when your ready.</p>
 
-                    <button type="button" class="btn btn-success mx-auto" id="startButton">
+                    <button type="button" class="btn btn-success" id="startButton">
                         Start Game
                     </button>
                 </div>
-
             </div>
 
-            <!--(Questions Content Row) This is the Row Holding the Main Page Content That Is Not Displayed Until Start Is Selected -->
+            <!--(Quiz Question, Answer Options, Submit Answer Button) Variable Display-->
             <div class = "row mb-4" id="quizContentContainer"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
                 <div class="col-md">
                     <div>
@@ -88,10 +86,9 @@
                     <!--Submit Button-->
                     <button type="button" class="btn btn-success">Submit Answer</button>
                 </div>
-
             </div>
 
-            <!--Score Presentation Screen and Initials Entry Form-->
+            <!--(Final Score Review and Initialials Entry, Score Submission) Variable Display-->
             <div class = "row mb-4" id="initialsEntryContainer"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
                 <div class = "col-md">
 
@@ -112,14 +109,11 @@
                           </div>
 
                         </div>
-
-                      </form>
-
+                    </form>
                 </div>
-
             </div>
 
-            <!--(Ending Screen Displaying High Scores and ReturnOptions) This is The Row That Is displayed to Start-->
+            <!--(Ending Screen Displaying High Scores and ReturnOptions) Variable Display-->
             <div class = "row mb-4" id="endingScreenContainer"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
                 <div class = "col-md">
 
