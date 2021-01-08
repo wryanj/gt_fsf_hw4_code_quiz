@@ -1,10 +1,16 @@
+
+//Key Containers to Hide or Unhide Through Process
+var welcomeScreenContainer = document.querySelector("welcomeScreenContainer");
+var quizContentContainer = document.querySelector("quizContentContainer");
+var initaialsEntryContainer = document.querySelector("initialsEntryContainer");
+var endingScreenContainer = document.querySelector("endingScreenContainer");
+
 //Define Elemenets I want To Manipulate in HTML and Retrieve Them using QuerySelector Method
 var getHighScore = document.querySelector("#getHighScore");
 var startButton = document.querySelector("#startButton"); //Need to Create Start Button With ID Hidden Somehow
 var countdownClock = document.querySelector("#countdownClock");
 var activeQuizQuestion = document.querySelector("#activeQuizQuestion");
 var finalScore = document.querySelector("#displayScore");
-var submittedOption;
 
 //Define Key Variables I will Define In The Script
 var timer;
@@ -15,7 +21,6 @@ var userScore;
 //Define Event Listners and Handlers to Trigger Important Functions
 getHighScore.addEventListener("click", displayHighScore) //Need to define display high score function
 startButton.addEventListener("click", startQuiz);
-
 
 
 //Define Quiz Questions (Define As Objects In Arra With Question & Answer Properties Somehow?)

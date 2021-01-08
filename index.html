@@ -39,7 +39,7 @@
             </div>
 
             <!--(Welcome Screen and Start Button) This is The Row That Is displayed to Start-->
-            <div class = "row mb-4">
+            <div class = "row mb-4" id="welcomeScreenContainer">
 
                 <div class = "col-md">
                     <p class="myBold mx-auto">Welcome to the Code Quiz! Press the Start Button when your ready.</p>
@@ -52,7 +52,7 @@
             </div>
 
             <!--(Questions Content Row) This is the Row Holding the Main Page Content That Is Not Displayed Until Start Is Selected -->
-            <div class = "row mb-4"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
+            <div class = "row mb-4" id="quizContentContainer"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
                 <div class="col-md">
                     <div>
                         <p class="myBold" id="activeQuizQuestion">Enter Question Text Here InnerHTML</p>
@@ -91,8 +91,8 @@
 
             </div>
 
-            <!--Ending Screen Displaying High Score and Requesting Entry of Initials, Buttons to Go Back or Clear Scores-->
-            <div class = "row mb-4"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
+            <!--Score Presentation Screen and Initials Entry Form-->
+            <div class = "row mb-4" id="initialsEntryContainer"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
                 <div class = "col-md">
 
                     <p class="mx-auto">Your Score Is <span class="myBold" id="finalScore">Display Score</span></p>
@@ -112,15 +112,15 @@
                           </div>
 
                         </div>
-                        
+
                       </form>
 
                 </div>
 
             </div>
 
-            <!--(Final Screen Displaying High Score) This is The Row That Is displayed to Start-->
-            <div class = "row mb-4"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
+            <!--(Ending Screen Displaying High Scores and ReturnOptions) This is The Row That Is displayed to Start-->
+            <div class = "row mb-4" id="endingScreenContainer"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
                 <div class = "col-md">
 
                     <p class="myBold mx-auto">List High Score Here</p>
