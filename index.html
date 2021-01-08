@@ -1,11 +1,108 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Bootsrap 4.5 CSS-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <!--My CSS-->
+        <link rel="stylesheet" href="/style/style.css">
+        <title>Code Quiz</title>
+    </head>
+
+    <body>
+
+        <!--(Nav) This is the Navbar and Header For The Page Used As A Heading-->
+        <nav class="navbar navbar-dark bg-dark mb-4">
+            <span class="navbar-brand mb-0 h1 mx-auto">Code Quiz</span>
+        </nav>
+
+        <!--(Container) This is the Container For All Page Content Between Nav and Footer-->
+        <div class="container mb-3 flex-shrink-0">
+
+            <!--This is The Row Containing the Right Justified Countdown Clock, and The Left Justified Get Highscore Link-->
+            <div class = "row mb-4">
+
+                <!--This is the Column Holding the Questions and Selection Items Within The Main Row-->
+                <div class = "col-md">
+
+                    <!--This is the Left Justified Link to Get High Scores-->
+                    <button type="button" class="btn btn-info float-left">
+                        Get High Scores
+                    </button>
+
+                    <!--This is the Right Justified Countdown Clock-->
+                    <button type="button" class="btn btn-info float-right">
+                        Time Remaining <span class="badge badge-light ml-1" id="countdownClock">50</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!--This is the Row Holding the Main Page Content (Questions and Selection Options) -->
+            <div class = "row">
+
+                <!--This is the Column Holding the Questions and Selection Items Within The Main Row-->
+                <div class="col-md">
+
+                    <!--Question Text-->
+                    <div>
+                        <p class="myBold" id="activeQuizQuestion">Enter Question Text Here InnerHTML</p>
+                    </div>
+
+                    <!--Answer Options-->
+                    <form class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                            <label class="form-check-label" for="exampleRadios1" id="activeOption1">
+                              Option 1
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                            <label class="form-check-label" for="exampleRadios2" id="activeOption1">
+                              Option 2
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                            <label class="form-check-label" for="exampleRadios2" id="activeOption3">
+                              Option 3
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                            <label class="form-check-label" for="exampleRadios2" id="activeOption1">
+                              Option 4
+                            </label>
+                        </div>
+                    </form>
+
+                    <!--Submit Button-->
+                    <button type="button" class="btn btn-success">Submit Answer</button>
+
+                </div>
+
+            </div>
     
-</body>
+        </div>
+
+
+        <!--Script Links-->
+
+            <!--My Logic-->
+            <script src="/logic/logic.js"></script>
+
+            <!--Bootsrap 4.5 JS Bundle-->
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    
+    </body>
+
 </html>
