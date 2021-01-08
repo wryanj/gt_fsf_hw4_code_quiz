@@ -1,6 +1,9 @@
 //Define Elemenets I want To Manipulate in HTML and Retrieve Them using QuerySelector Method
+var getHighScore = document.querySelector("#getHighScore");
+var startButton = document.querySelector("#startButton"); //Need to Create Start Button With ID Hidden Somehow
 var countdownClock = document.querySelector("#countdownClock");
 var activeQuizQuestion = document.querySelector("#activeQuizQuestion");
+var finalScore = document.querySelector("#displayScore");
 var submittedOption;
 
 //Define Key Variables I will Define In The Script
@@ -9,34 +12,52 @@ var timerCount;
 var isCorrectOption;
 var userScore;
 
-//Define Quiz Questions (Define As Objects In Arra With Question & Answer Properties Somehow?)
-
 //Define Event Listners and Handlers to Trigger Important Functions
+getHighScore.addEventListener("click", displayHighScore) //Need to define display high score function
+startButton.addEventListener("click", startQuiz);
+
+
+
+//Define Quiz Questions (Define As Objects In Arra With Question & Answer Properties Somehow?)
+var questionsArray,[];
+
 
 //Define Logic For Executing Script
 
     //When Page Is initialized....
-
-        //Display The Initial Welcome Content With The Start Button
+    function init() {
 
         //Populate Countdown Clock
 
-    
+    }
+
     //When Get High Scores Button is Clicked...
 
         //Retrieve High Scores and Initials From Local Storage (as an string converted back to object using JSON.parse method)...
 
         //Display the Initials and High Scores to the User...
 
-    //When Start Button Is Clicked....
+    //When Start Button Is Clicked, run start game function....
+    function startQuiz() {
+        console.log("Started");
 
         //Start Countdown Clock
 
-        //Display DIV With Question, Answer, Submit Button Populated With First Question (Make Re-Usable Function When Submit Is Clicked)
+        //Shuffle the Questions Order
+
+        //Hide The Welcome Screen and Button By Removing adding the d-none bootstrap class to that row https://stackoverflow.com/questions/195951/how-can-i-change-an-elements-class-with-javascript
+
+        //Display the row with the questions and answers by removing the d-none bootstrap class for that row
+
+        //Display Rist Question With Options & Submit Button (Make Re-Usable Function When Submit Is Clicked)
 
             //Pick a question (that has not been displayed this session)...
 
             //Display the Question With The Answer Options
+
+    }
+
+        
 
     //When Submit Answer Button Is Clicked....
 
