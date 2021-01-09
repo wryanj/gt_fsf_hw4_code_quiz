@@ -19,21 +19,21 @@ var isCorrectOption;
 var userScore;
 
 //Define Event Listners and Handlers to Trigger Important Functions
-getHighScore.addEventListener("click", displayHighScore) //Need to define display high score function
+document.body.addEventListener("onload", init);
 startButton.addEventListener("click", startQuiz);
 
 
 //Define Quiz Questions (Define As Objects In Arra With Question & Answer Properties Somehow?)
-var questionsArray,[];
 
 
 //Define Logic For Executing Script
 
     //When Page Is initialized....
     function init() {
-
-        //Populate Countdown Clock
-
+        console.log("page initialized")
+        //Set Timer Clock Starting Value & Replace the InnerHTML of Countdown Clock with the variable
+        timerCount=7000;
+        countdownClock.innerHTML=timerCount;
     }
 
     //When Get High Scores Button is Clicked...

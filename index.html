@@ -32,7 +32,7 @@
                     </button>
                     
                     <button type="button" class="btn btn-info float-right">
-                        Time Remaining <span class="badge badge-light ml-1" id="countdownClock">50</span>
+                        Time Remaining <span class="badge badge-light ml-1" id="countdownClock"></span>
                     </button>
 
                 </div>
@@ -43,7 +43,7 @@
                 <div class = "col-md">
                     <p class="myBold text-center">Welcome to the Code Quiz! Press the Start Button when your ready.</p>
 
-                    <button type="button" class="btn btn-success" id="startButton">
+                    <button type="button" class="btn btn-success mx-auto d-block" id="startButton">
                         Start Game
                     </button>
                 </div>
@@ -92,12 +92,12 @@
             <div class = "row mb-4" id="initialsEntryContainer"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
                 <div class = "col-md">
 
-                    <p class="mx-auto">Your Score Is <span class="myBold" id="finalScore">Display Score</span></p>
+                    <p class="mx-auto text-center">Your Score Is <span class="myBold" id="finalScore">Display Score</span></p>
 
-                    <p>Enter your initials below and hit submit to log your results</p>
+                    <p class="text-center">Enter your initials below and hit submit to log your results</p>
 
                     <form>
-                        <div class="form-row align-items-center">
+                        <div class="form-row justify-content-center">
 
                           <div class="col-auto">
                             <label class="sr-only" for="inlineFormInput">Name</label>
@@ -117,15 +117,17 @@
             <div class = "row mb-4" id="endingScreenContainer"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
                 <div class = "col-md">
 
-                    <p class="myBold mx-auto">List High Score Here</p>
+                    <p class="myBold mx-auto text-center">Highs scores listed here</p>
 
-                    <button type="button" class="btn btn-secondary mx-auto" id="startButton">
-                        Clear High Score
-                    </button>
-
-                    <button type="button" class="btn btn-secondary mx-auto" id="startButton">
-                        Play Again
-                    </button>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-secondary mx-auto" id="startButton">
+                            Clear High Scores
+                        </button>
+    
+                        <button type="button" class="btn btn-secondary mx-auto" id="startButton">
+                            Play Again
+                        </button>
+                    </div>
 
                 </div>
 
