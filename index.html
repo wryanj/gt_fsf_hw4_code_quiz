@@ -5,14 +5,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--Bootsrap 4.5 CSS-->
+        <!--Bootsrap 4.5 CDN Used For CSS-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        <!--My CSS-->
+        <!--My CSS File-->
         <link rel="stylesheet" href="/style/style.css">
         <title>Code Quiz</title>
     </head>
 
-    <body>
+    <body onload="init()">
 
         <!--(Nav) This is the Navbar and Header For The Page Used As A Heading-->
         <nav class="navbar navbar-dark bg-dark mb-4">
@@ -50,8 +50,8 @@
             </div>
 
             <!--(Quiz Question, Answer Options, Submit Answer Button) Variable Display-->
-            <div class = "row mb-4" id="quizContentContainer"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
-                <div class="col-md">
+            <div class = "row mb-4 d-none" id="quizContentContainer"> <!--USE d-none to Hide This Until Otherwise Changed by the JS Script-->
+                <div class="col-md text-center">
                     <div>
                         <p class="myBold" id="activeQuizQuestion">Enter Question Text Here InnerHTML</p>
                     </div>
@@ -89,7 +89,7 @@
             </div>
 
             <!--(Final Score Review and Initialials Entry, Score Submission) Variable Display-->
-            <div class = "row mb-4" id="initialsEntryContainer"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
+            <div class = "row mb-4 d-none" id="initialsEntryContainer"> <!--USE d-none to Hide This Until Otherwise Changed by the JS Script-->
                 <div class = "col-md">
 
                     <p class="mx-auto text-center">Your Score Is <span class="myBold" id="finalScore">Display Score</span></p>
@@ -114,7 +114,7 @@
             </div>
 
             <!--(Ending Screen Displaying High Scores and ReturnOptions) Variable Display-->
-            <div class = "row mb-4" id="endingScreenContainer"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
+            <div class = "row mb-4 d-none" id="endingScreenContainer"> <!--USE D-NONE to Hide This Until Otherwise Changed by the JS Script-->
                 <div class = "col-md">
 
                     <p class="myBold mx-auto text-center">Highs scores listed here</p>
@@ -136,15 +136,16 @@
         </main>
 
 
-        <!--Script Links-->
+        <!--Script Links (Need to confirm these work ok and some dont have to be in the head)-->
 
-            <!--My Logic-->
-            <script src="/logic/logic.js"></script>
-
-            <!--Bootsrap 4.5 JS Bundle-->
+            <!--Bootsrap 4.5 JS Bundle CDN Used For Bootstrap CSS-->
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    
+
+            <!--My Javascript File-->
+            <script src="/logic/logic.js"></script>
+
+            
     </body>
 
 </html>

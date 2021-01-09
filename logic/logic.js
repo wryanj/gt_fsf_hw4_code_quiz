@@ -1,13 +1,13 @@
 
 //Key Containers to Hide or Unhide Through Process
-var welcomeScreenContainer = document.querySelector("welcomeScreenContainer");
-var quizContentContainer = document.querySelector("quizContentContainer");
-var initaialsEntryContainer = document.querySelector("initialsEntryContainer");
-var endingScreenContainer = document.querySelector("endingScreenContainer");
+var welcomeScreenContainer = document.querySelector("#welcomeScreenContainer");
+var quizContentContainer = document.querySelector("#quizContentContainer");
+var initaialsEntryContainer = document.querySelector("#initialsEntryContainer");
+var endingScreenContainer = document.querySelector("#endingScreenContainer");
 
 //Define Elemenets I want To Manipulate in HTML and Retrieve Them using QuerySelector Method
 var getHighScore = document.querySelector("#getHighScore");
-var startButton = document.querySelector("#startButton"); //Need to Create Start Button With ID Hidden Somehow
+var startButton = document.querySelector("#startButton"); 
 var countdownClock = document.querySelector("#countdownClock");
 var activeQuizQuestion = document.querySelector("#activeQuizQuestion");
 var finalScore = document.querySelector("#displayScore");
@@ -18,22 +18,18 @@ var timerCount;
 var isCorrectOption;
 var userScore;
 
+//Define Quiz Questions (Define As Objects In Arra With Question & Answer Properties Somehow?)
+
 //Define Event Listners and Handlers to Trigger Important Functions
-document.body.addEventListener("onload", init);
+document.addEventListener("onload", init); //this is not working
 startButton.addEventListener("click", startQuiz);
 
 
-//Define Quiz Questions (Define As Objects In Arra With Question & Answer Properties Somehow?)
+//Define Program Logic & Sequence
 
-
-//Define Logic For Executing Script
-
-    //When Page Is initialized....
+    //When Page Is initialized....(Have to call this function when page is initialized)
     function init() {
-        console.log("page initialized")
-        //Set Timer Clock Starting Value & Replace the InnerHTML of Countdown Clock with the variable
-        timerCount=7000;
-        countdownClock.innerHTML=timerCount;
+        console.log("Page Loaded and Init() Function Called")
     }
 
     //When Get High Scores Button is Clicked...
@@ -42,24 +38,56 @@ startButton.addEventListener("click", startQuiz);
 
         //Display the Initials and High Scores to the User...
 
-    //When Start Button Is Clicked, run start game function....
-    function startQuiz() {
-        console.log("Started");
 
-        //Start Countdown Clock
+    //When Start Button Is Clicked, run start game function and the startCountdown Function....
+    function startQuiz() {
+        console.log("Start Button Clicked and startQuiz() Function Called");
 
         //Shuffle the Questions Order
 
-        //Hide The Welcome Screen and Button By Removing adding the d-none bootstrap class to that row https://stackoverflow.com/questions/195951/how-can-i-change-an-elements-class-with-javascript
+        //Hide The welcomeScreenContainer Screen & Display The Quiz Div
+        welcomeScreenContainer.classList.add("d-none");
+        console.log("Welcome Screen Container Hidden")
 
-        //Display the row with the questions and answers by removing the d-none bootstrap class for that row
+        //Show the quizContentContainer
+        quizContentContainer.classList.remove("d-none");
+        console.log("Quiz Content Container Displayed")
 
-        //Display Rist Question With Options & Submit Button (Make Re-Usable Function When Submit Is Clicked)
+        //Display First Quiz Question and Answer Choices (Make Re-Usable Function When Submit Is Clicked)
 
             //Pick a question (that has not been displayed this session)...
 
             //Display the Question With The Answer Options
 
+        //Define the startCountdown function locally within the startQuiz function...
+        function startCountdown(){
+            console.log("Nested startCountdown() function started")
+            var timerCount = 3;
+            countdownClock.textContent = timerCount;
+
+            //Use set Interval Method to call function to execute every 1000 milleseconds
+            var timeInterval = setInterval(function () {
+                //As long as time is left on the clock...
+                if (timerCount != 0) {
+                    //Show remaining seconds on countdown clock...
+                    countdownClock.textContent = timerCount;
+                    //Decrement the Timer Count by 1...
+                    timerCount--;
+                } else {
+                    //Once time gets to zero (its equal to 0), display 0
+                    countdownClock.textContent = "";
+                    //clear the interval with the clearInterval method
+                    clearInterval(timeInterval);
+                    //and alert the user that the time has expired..
+                    alert ("Time's Up!");
+                }
+            }, 1000)
+        }
+
+        //Call the startCountdown function defined above so that it runs
+        return startCountdown();
+        
+        
     }
 
         
