@@ -31,6 +31,7 @@ var finalScore = document.querySelector("#finalScore");
 var scoreCount = 0;
 var initialsInput = document.querySelector("#initialsInput");
 var submitScoreButton = document.querySelector("#submitScoreButton");
+var highScoresList = document.querySelector("highScoresList");
 
 //Define Quiz Questions Array
 var quizQuestions = [
@@ -116,8 +117,7 @@ var quizQuestions = [
 
     //When Start Button Is Clicked, Start The Quiz (Display Questions Div HTML, Start Countdown)....
     function displayQuiz() {
-
-        console.log("Start Button Clicked and startQuiz() Function Called");
+        console.log("Start Button Clicked and displayQuiz() function invoked");
 
         //Shuffle the Questions Order? |REVISIT|
 
@@ -132,7 +132,7 @@ var quizQuestions = [
     
     //Start The Countdown Clock timer..
     function countdown(){
-        console.log("Nested startCountdown() function started")
+        console.log("countdown() function invoked")
         timerCount = 30;
         countdownClock.textContent = timerCount;
 
@@ -160,13 +160,11 @@ var quizQuestions = [
 
     //Once Quiz is Started, Render First Quiz Question and Answer Choices (Make Re-Usable Function When Submit Is Clicked)
     function renderQuizQuestion (){
-        console.log("Render Quiz Question Function Has Been Invoked. Running Index For Quiz Question is now set to " + runningQuestionIndex); //On second call this shows what I want, index up by 1...
-        console.log (quizQuestions[runningQuestionIndex].questionName);
+        console.log("renderQuizQuestion Function Has Been invoked");
 
         //Make Sure submissionResultContainer is hidden
         submissionResultContainer.classList.add("d-none");
-        console.log("submissionResultContainer Hidden");
-
+        
         //Clear old checked properties
         for (i = 0, length = radioQuestions.length; i < length; i++) {
             radioQuestions[i].checked = false;
@@ -188,7 +186,7 @@ var quizQuestions = [
 
     //Check if answer is correct by
     function checkAnswer(){
-        console.log("checkAnswer function called")
+        console.log("checkAnswer() function has been invoked")
 
         //Get the value of the answer
 
@@ -211,17 +209,13 @@ var quizQuestions = [
                 return;
             }
 
-        //If submitted option is correct...
-        console.log("the selected answer I have to work with ahead of checking for correct is " + selectedOption);
-        console.log("the correct answer for the current question I have is " + quizQuestions[runningQuestionIndex].correctOption);
-            
+        //If submitted option is correct...  
         if (selectedOption === quizQuestions[runningQuestionIndex].correctOption) {
 
-            //Display green text "correct"!
+            //Display green text "Correct"!
 
                 //Show the submissionResultContainer
                 submissionResultContainer.classList.remove("d-none");
-                console.log("submissionResultContainer Displayed");
 
                 //Assign my .correct class to the p elemenet in that container (and remove incorrect class if its present)
                 submissionResultText.classList.remove("incorrect");
@@ -232,13 +226,12 @@ var quizQuestions = [
 
             //Up the score count..
                 scoreCount = scoreCount + 25;
-                console.log("Current Score Is " + scoreCount);
+                console.log("Current scoreCount is  " + scoreCount);
 
             //Render the next question..
 
                 // Up the running question index by 1...
                 runningQuestionIndex++;
-                console.log("Running question index is now set to " + runningQuestionIndex);
 
                 // Wait 1 Second and call the render quiz question function again 
                 return setTimeout(renderQuizQuestion, 1000);
@@ -251,18 +244,17 @@ var quizQuestions = [
 
                 //Show the submissionResultContainer
                 submissionResultContainer.classList.remove("d-none");
-                console.log("submissionResultContainer Displayed");
 
                 //Assign my .incorrect class to the p elemenet in that container (and remove my .correct class if its present)
                 submissionResultText.classList.remove("correct");
                 submissionResultText.classList.add("incorrect");
                 
-                //Make the text content say "correct!"
+                //Make the text content say "Incorrect"
                 submissionResultText.textContent = "Incorrect";
 
             //Decrease the score count..
                 scoreCount = scoreCount - 50;
-                console.log("Current Score Is " + scoreCount);
+                console.log("Current scoreCount Is " + scoreCount);
 
             //Decrement the Timer 10 Seconds
                 timerCount = timerCount-10;
@@ -271,24 +263,20 @@ var quizQuestions = [
 
                 // Up the running question index by 1...
                 runningQuestionIndex++;
-                console.log("Running question index is now set to " + runningQuestionIndex);
 
                 // Wait 1 Second and call the render quiz question function again 
-                return setTimeout(renderQuizQuestion, 1000);
+                setTimeout(renderQuizQuestion, 1000);
         }  
     }
 
     //When game is finished (timer expires OR question sequence completes) present final score and input form for user initials
     function presentFinalQuizScore() {
-        console.log ("logQuizScore function started");
+        console.log ("presentFinalQuizScore() function has been invoked");
 
         //Hide the quizContentContainer and the submissionResultContainerand Display the logQuizScoreContainer
         quizContentContainer.classList.add("d-none");
-        console.log("quiz content container hidden");
         submissionResultContainer.classList.add("d-none");
-        console.log("submission result container hidden");
         logQuizScoreContainer.classList.remove("d-none");
-        console.log("log quiz questions container displayed");
 
         //Present the users score to them
         finalScore.textContent = scoreCount;
@@ -296,12 +284,22 @@ var quizQuestions = [
 
     //Upon click of the submit score button.. capture their initials and score and store it locally
     function logQuizScore(){
+        console.log("logQuizScore() function has been invoked")
 
         //Collect the users initials from the form as a local variable
         console.log(initialsInput.value);
         var userInitials = initialsInput.value;
 
         //Display the latest list of initials and high scores...
+
+            //Hide the logQuizScore container and display the endingScreenContainer
+            logQuizScoreContainer.classList.add("d-none");
+            endingScreenContainer.classList.remove("d-none");
+
+            //Append the latest stuff to the screen
+            highScoresList.append(userInitials, finalScore);
+
+
 
         //update the screen with new options for the user Go-Back and Clear High-Scores
 
@@ -314,6 +312,8 @@ var quizQuestions = [
                 //Return to Start of Quiz
 
     }
+
+   
        
 
 
