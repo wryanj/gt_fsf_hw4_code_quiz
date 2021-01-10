@@ -135,16 +135,16 @@ var quizQuestions = [
                 //Use set Interval Method to call function to execute every 1000 milleseconds
                 var timeInterval = setInterval(function () {
                     //As long as time is left on the clock...
-                    if (timerCount != 0) {
+                    if (timerCount > 0) {
                         //Show remaining seconds on countdown clock...
                         countdownClock.textContent = timerCount;
                         //Decrement the Timer Count by 1...
                         timerCount--;
                     } else {
-                        //Once time gets to zero (its equal to 0), display 0
-                        countdownClock.textContent = "";
                         //clear the interval with the clearInterval method
                         clearInterval(timeInterval);
+                        //Once time gets to zero (its equal to 0), display 0
+                        countdownClock.textContent = "0";
                         //and alert the user that the time has expired..
                         alert ("Time's Up!");
                     }
