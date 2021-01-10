@@ -1,4 +1,9 @@
 
+//Declare Global Variables
+var timerCount;
+var runningQuestionIndex = 0;
+var selectedOption;
+
 //Key Containers to Hide or Unhide Through Process
 var welcomeScreenContainer = document.querySelector("#welcomeScreenContainer");
 var quizContentContainer = document.querySelector("#quizContentContainer");
@@ -25,9 +30,7 @@ var submissionResultText = document.querySelector("#submissionResultText");
 var finalScore = document.querySelector("#displayScore");
 var scoreCount = 0;
 
-//Define Quiz Questions Array And Related Quiz Variables
-var runningQuestionIndex = 0;
-var selectedOption;
+//Define Quiz Questions Array
 var quizQuestions = [
     {
         questionName: "Question 0",
@@ -126,7 +129,7 @@ var quizQuestions = [
             //startCoundown function..
             function startCountdown(){
                 console.log("Nested startCountdown() function started")
-                var timerCount = 500;
+                timerCount = 500;
                 countdownClock.textContent = timerCount;
 
                 //Use set Interval Method to call function to execute every 1000 milleseconds
@@ -182,6 +185,7 @@ var quizQuestions = [
         console.log("checkAnswer function called")
 
         //Get the value of the answer
+
             //If 'any' radio button is checked, run through each option to detect the selected answer...
             if (activeOption1Value.checked===true || activeOption2Value.checked===true || activeOption3Value.checked===true || activeOption4Value.checked===true) {
                 for (i = 0, length = radioQuestions.length; i < length; i++) {
@@ -213,7 +217,8 @@ var quizQuestions = [
                 submissionResultContainer.classList.remove("d-none");
                 console.log("submissionResultContainer Displayed");
 
-                //Assign my .correct class to the p elemenet in that container
+                //Assign my .correct class to the p elemenet in that container (and remove incorrect class if its present)
+                submissionResultText.classList.remove("incorrect");
                 submissionResultText.classList.add("correct");
                 
                 //Make the text content say "correct!"
@@ -231,7 +236,39 @@ var quizQuestions = [
 
                 // Wait 1 Second and call the render quiz question function again 
                 return setTimeout(renderQuizQuestion, 1000);
-            
+        }
+
+        //If submitted option is not correct...
+        else {
+
+            //Display red text "Incorrect"
+
+                //Show the submissionResultContainer
+                submissionResultContainer.classList.remove("d-none");
+                console.log("submissionResultContainer Displayed");
+
+                //Assign my .incorrect class to the p elemenet in that container (and remove my .correct class if its present)
+                submissionResultText.classList.remove("correct");
+                submissionResultText.classList.add("incorrect");
+                
+                //Make the text content say "correct!"
+                submissionResultText.textContent = "Incorrect";
+
+            //Decrease the score count..
+                scoreCount = scoreCount - 50;
+                console.log("Current Score Is " + scoreCount);
+
+            //Decrement the Timer 10 Seconds
+
+            //Render the next question..
+
+                // Up the running question index by 1...
+                runningQuestionIndex++;
+                console.log("Running question index is now set to " + runningQuestionIndex);
+
+                // Wait 1 Second and call the render quiz question function again 
+                return setTimeout(renderQuizQuestion, 1000);
+
         }
         
 
