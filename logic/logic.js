@@ -5,18 +5,21 @@ var quizContentContainer = document.querySelector("#quizContentContainer");
 var initaialsEntryContainer = document.querySelector("#initialsEntryContainer");
 var endingScreenContainer = document.querySelector("#endingScreenContainer");
 
-//Define Elemenets I want To Manipulate in HTML and Retrieve Them using QuerySelector Method, Then assign their value to a variable for use in script
+//Define Elemenets I want To Reference or Manipulate in HTML and Retrieve Them using QuerySelector Method, Then assign their value to a variable for use in script
 var getHighScore = document.querySelector("#getHighScore");
 var startButton = document.querySelector("#startButton"); 
 var submitAnswerButton = document.querySelector("#submitAnswerButton");
 var countdownClock = document.querySelector("#countdownClock");
 var activeQuizQuestion = document.querySelector("#activeQuizQuestion");
 var activeOption1 = document.querySelector("#activeOption1");
+var activeOption1Value = document.querySelector("#radio1");
 var activeOption2 = document.querySelector("#activeOption2");
+var activeOption2Value = document.querySelector("#radio2");
 var activeOption3 = document.querySelector("#activeOption3");
+var activeOption3Value = document.querySelector("#radio3");
 var activeOption4 = document.querySelector("#activeOption4");
+var activeOption4Value = document.querySelector("#radio4");
 var radioQuestions = document.querySelectorAll(".form-check-input");
-    console.log("number of radio button elemenets detected is " + radioQuestions.length);
 var finalScore = document.querySelector("#displayScore");
 
 //Define Quiz Questions Array And Related Quiz Variables
@@ -142,9 +145,13 @@ var runningQuestionIndex = 0;
         var q = quizQuestions[runningQuestionIndex];
             activeQuizQuestion.textContent = q.questionText;
             activeOption1.textContent = q.optionA;
+            activeOption1Value.setAttribute("value", q.optionA);
             activeOption2.textContent = q.optionB;
+            activeOption2Value.setAttribute("value", q.optionB);
             activeOption3.textContent = q.optionC;
+            activeOption3Value.setAttribute("value", q.optionC);
             activeOption4.textContent = q.correctOption;
+            activeOption4Value.setAttribute("value", q.correctOption);
             }
 
  //REVIEW    //Once Quiz is Started, Upon Click of Submit Answer Button....(THIS NEEDS TO BE LOOPED)
