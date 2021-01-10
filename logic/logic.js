@@ -2,6 +2,7 @@
 //Key Containers to Hide or Unhide Through Process
 var welcomeScreenContainer = document.querySelector("#welcomeScreenContainer");
 var quizContentContainer = document.querySelector("#quizContentContainer");
+var submissionResultContainer = document.querySelector("#submissionResultContainer");
 var initaialsEntryContainer = document.querySelector("#initialsEntryContainer");
 var endingScreenContainer = document.querySelector("#endingScreenContainer");
 
@@ -20,7 +21,9 @@ var activeOption3Value = document.querySelector("#radio3");
 var activeOption4 = document.querySelector("#activeOption4");
 var activeOption4Value = document.querySelector("#radio4");
 var radioQuestions = document.querySelectorAll(".form-check-input");
+var submissionResultText = document.querySelector("#submissionResultText");
 var finalScore = document.querySelector("#displayScore");
+var scoreCount = 0;
 
 //Define Quiz Questions Array And Related Quiz Variables
 var quizQuestions = [
@@ -66,10 +69,12 @@ var quizQuestions = [
     },
 ]
 
-var lastQuestionIndex = quizQuestions.length-1;
-var runningQuestionIndex = 0;
+    var runningQuestionIndex = 0;
+    var currentQuestion = quizQuestions[runningQuestionIndex];
+    var selectedOption;
 
 //Define Event Listners and Handlers to Trigger Important Functions
+
     //Start Button
         //When Start Button is Clicked, Start Quiz
         startButton.addEventListener("click", startQuiz);
@@ -97,6 +102,7 @@ var runningQuestionIndex = 0;
 
     //When Start Button Is Clicked, Start The Quiz (Display Questions Div HTML, Start Countdown)....
     function startQuiz() {
+
         console.log("Start Button Clicked and startQuiz() Function Called");
 
         //Shuffle the Questions Order? |REVISIT|
@@ -139,46 +145,76 @@ var runningQuestionIndex = 0;
             }
     }
 
-    //Render First Quiz Question and Answer Choices (Make Re-Usable Function When Submit Is Clicked)
+    //Once Quiz is Started, Render First Quiz Question and Answer Choices (Make Re-Usable Function When Submit Is Clicked)
     function renderQuizQuestion (){
         console.log("first render question function started")
-        var q = quizQuestions[runningQuestionIndex];
-            activeQuizQuestion.textContent = q.questionText;
-            activeOption1.textContent = q.optionA;
-            activeOption1Value.setAttribute("value", q.optionA);
-            activeOption2.textContent = q.optionB;
-            activeOption2Value.setAttribute("value", q.optionB);
-            activeOption3.textContent = q.optionC;
-            activeOption3Value.setAttribute("value", q.optionC);
-            activeOption4.textContent = q.correctOption;
-            activeOption4Value.setAttribute("value", q.correctOption);
+
+        //Make Sure submissionResultContainer is hidden
+        submissionResultContainer.classList.add("d-none");
+        console.log("submissionResultContainer Hidden");
+
+        //Populate the currentQuestion and choices to the form text choices field
+        activeQuizQuestion.textContent = currentQuestion.questionText;
+        activeOption1.textContent = currentQuestion.optionA;
+        activeOption1Value.setAttribute("value", currentQuestion.optionA);
+        activeOption2.textContent = currentQuestion.optionB;
+        activeOption2Value.setAttribute("value", currentQuestion.optionB);
+        activeOption3.textContent = currentQuestion.optionC;
+        activeOption3Value.setAttribute("value", currentQuestion.optionC);
+        activeOption4.textContent = currentQuestion.correctOption;
+        activeOption4Value.setAttribute("value", currentQuestion.correctOption);
     }
 
- //REVIEW    //Once Quiz is Started, Upon Click of Submit Answer Button....(THIS NEEDS TO BE LOOPED)
+    
+    //After first question is displayed, Upon Click of Submit Answer Button....
 
-    //Check if answer is correct
+    //Check if answer is correct by
     function checkAnswer(){
         console.log("checkAnswer function called")
-        //If a radio button is checked, run through each option to detect the selected answer...
-        if (activeOption1Value.checked===true || activeOption2Value.checked===true || activeOption3Value.checked===true || activeOption4Value.checked===true) {
-            for (i = 0, length = radioQuestions.length; i < length; i++) {
-                //if the radio question is checked...
-                if (radioQuestions[i].checked) {
-                    //set the selectedOption variable value equal to the value of the selected radio button...
-                    var selectedOption = radioQuestions[i].value;
-                    console.log("Selected Option Variable set to " + selectedOption);
-                    //and break the loop
-                    break;
-                 }
-            }   
-        } 
-        else {
-            alert("Please select an option");
-            return;
-        }
-    }
 
-     //If submitted option is correct...
+        //Get the value of the answer
+            //If 'any' radio button is checked, run through each option to detect the selected answer...
+            if (activeOption1Value.checked===true || activeOption2Value.checked===true || activeOption3Value.checked===true || activeOption4Value.checked===true) {
+                for (i = 0, length = radioQuestions.length; i < length; i++) {
+                    //if the radio question is checked...
+                    if (radioQuestions[i].checked) {
+                        //set the selectedOption variable value equal to the value of the selected radio button...
+                        var selectedOption = radioQuestions[i].value;
+                        //and break the loop
+                        break;
+                    }
+                }   
+            } 
+            //If 'no' radio buttons are selected, alert the user to make a selection and have them
+            else {
+                alert("Please select an option");
+                return;
+            }
+
+        //If submitted option is correct...
+        console.log("the selected answer I have to work with ahead of checking for correct is " + selectedOption);
+        console.log("the correct answer for the current question I have is " + currentQuestion.correctOption);
+            
+        if (selectedOption === currentQuestion.correctOption) {
+            //Display green text "correct"!
+
+                //Show the submissionResultContainer
+                submissionResultContainer.classList.remove("d-none");
+                console.log("submissionResultContainer Displayed");
+
+                //Assign my .correct class to the p elemenet in that container
+                submissionResultText.classList.add("correct");
+                
+                //Make the text content say "correct!"
+                submissionResultText.textContent = "Correct!";
+
+            //Up the score count..
+                scoreCount = scoreCount + 25;
+                console.log("Current Score Is " + scoreCount);
+
+            //Render the next question..
+            
+        }
         
 
         //Display Text "Correct!"..
@@ -188,6 +224,11 @@ var runningQuestionIndex = 0;
             //Advance to the Next Question (up the running array index, then use render quiz question with that array)
             //runningQuestionIndex++;
             //renderQuizQuestion();
+    }
+
+
+
+
                 
             
             //If submitted option is incorrect
