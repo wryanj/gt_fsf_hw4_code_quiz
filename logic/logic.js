@@ -8,12 +8,12 @@ var selectedOption;
 var welcomeScreenContainer = document.querySelector("#welcomeScreenContainer");
 var quizContentContainer = document.querySelector("#quizContentContainer");
 var submissionResultContainer = document.querySelector("#submissionResultContainer");
-var initaialsEntryContainer = document.querySelector("#initialsEntryContainer");
+var logQuizScoreContainer = document.querySelector("#logQuizScoreContainer");
 var endingScreenContainer = document.querySelector("#endingScreenContainer");
 
 //Define Elemenets I want To Reference or Manipulate in HTML and Retrieve Them using QuerySelector Method, Then assign their value to a variable for use in script
 var getHighScore = document.querySelector("#getHighScore");
-var startButton = document.querySelector("#startButton"); 
+var startQuizButton = document.querySelector("#startQuizButton");
 var submitAnswerButton = document.querySelector("#submitAnswerButton");
 var countdownClock = document.querySelector("#countdownClock");
 var activeQuizQuestion = document.querySelector("#activeQuizQuestion");
@@ -27,8 +27,10 @@ var activeOption4 = document.querySelector("#activeOption4");
 var activeOption4Value = document.querySelector("#radio4");
 var radioQuestions = document.querySelectorAll(".form-check-input");
 var submissionResultText = document.querySelector("#submissionResultText");
-var finalScore = document.querySelector("#displayScore");
+var finalScore = document.querySelector("#finalScore");
 var scoreCount = 0;
+var initialsInput = document.querySelector("#initialsInput");
+var submitScoreButton = document.querySelector("#submitScoreButton");
 
 //Define Quiz Questions Array
 var quizQuestions = [
@@ -79,20 +81,23 @@ var quizQuestions = [
     }
 ]
    
-
 //Define Event Listners and Handlers to Trigger Important Functions
 
-    //Start Button
+    //Start Quiz Button
         //When Start Button is Clicked, Display the quiz content div
-        startButton.addEventListener("click", displayQuiz);
+        startQuizButton.addEventListener("click", displayQuiz);
         //When Start Button is Clicked, start the countdown function
-        startButton.addEventListener("click", countdown);
+        startQuizButton.addEventListener("click", countdown);
         //When Start Button is Clicked, render quiz question for the first time
-        startButton.addEventListener("click", renderQuizQuestion);
+        startQuizButton.addEventListener("click", renderQuizQuestion);
 
-    //Submit Button
+    //Submit Answer Button
         //When Submit Answer Button is Clicked, Call The checkAnswer Function
         submitAnswerButton.addEventListener("click", checkAnswer);
+    
+    //Submit Score Button
+        //When Submit Score button is clicked, call the logQuizScore function
+        submitScoreButton.addEventListener("click", logQuizScore);
 
 
 //Define Program Logic & Sequence
@@ -146,7 +151,8 @@ var quizQuestions = [
                 countdownClock.textContent = "0";
                 // alert the user that the time has expired..
                 alert ("Time's Up!");
-                // call the function to show score and log results--HOW
+                // call the function to show the final score and gather intiials
+                presentFinalQuizScore();
             }
         }, 1000)
     }
@@ -272,27 +278,50 @@ var quizQuestions = [
         }  
     }
 
-      //When game is finished (timer expires OR question sequence completes)...
+    //When game is finished (timer expires OR question sequence completes) present final score and input form for user initials
+    function presentFinalQuizScore() {
+        console.log ("logQuizScore function started");
 
-        //Present High Score From That Round to The User
+        //Hide the quizContentContainer and the submissionResultContainerand Display the logQuizScoreContainer
+        quizContentContainer.classList.add("d-none");
+        console.log("quiz content container hidden");
+        submissionResultContainer.classList.add("d-none");
+        console.log("submission result container hidden");
+        logQuizScoreContainer.classList.remove("d-none");
+        console.log("log quiz questions container displayed");
 
-        //Collect the Users Initials using a form or other input means...
+        //Present the users score to them
+        finalScore.textContent = scoreCount;
+    }
 
-        //Present a Submit Score Button to the User
+    //Upon click of the submit score button.. capture their initials and score and store it locally
+    function logQuizScore(){
+
+        //Collect the users initials from the form as a local variable
+        console.log(initialsInput.value);
+        var userInitials = initialsInput.value;
+
+        //Display the latest list of initials and high scores...
+
+        //update the screen with new options for the user Go-Back and Clear High-Scores
+
+            //If Go back is Selected, Return to Start of Quiz
+
+            //If Clear High Scores is Selected...
+
+                //Clear local storage
+
+                //Return to Start of Quiz
+
+    }
+       
+
+
+
+
+
     
-        //When Submit Score Button is Pressed
 
-            //store the initials and high score locally as an object using JSON.stringify method...
 
-            //Display the latest list of initials and high scores...
-
-            //update the screen with new options for the user Go-Back and Clear High-Scores
-
-                //If Go back is Selected, Return to Start of Quiz
-
-                //If Clear High Scores is Selected...
-
-                    //Clear local storage
-
-                    //Return to Start of Quiz
+            
     

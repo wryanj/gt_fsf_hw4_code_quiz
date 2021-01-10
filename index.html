@@ -43,7 +43,7 @@
                 <div class = "col-md">
                     <p class="myBold text-center">Welcome to the Code Quiz! Press the Start Button when your ready.</p>
 
-                    <button type="button" class="btn btn-success mx-auto d-block mb-3" id="startButton">
+                    <button type="button" class="btn btn-success mx-auto d-block mb-3" id="startQuizButton">
                         Start Quiz
                     </button>
 
@@ -105,7 +105,7 @@
             </div>
 
             <!--(Final Score Review and Initialials Entry, Score Submission) Variable Display-->
-            <div class = "row mb-4 d-none" id="initialsEntryContainer"> <!--USE d-none to Hide This Until Otherwise Changed by the JS Script-->
+            <div class = "row mb-4 d-none" id="logQuizScoreContainer"> <!--USE d-none to Hide This Until Otherwise Changed by the JS Script-->
                 <div class = "col-md">
 
                     <p class="mx-auto text-center">Your Score Is <span class="myBold" id="finalScore">Display Score</span></p>
@@ -117,11 +117,11 @@
 
                           <div class="col-auto">
                             <label class="sr-only" for="inlineFormInput">Name</label>
-                            <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe">
+                            <input type="text" class="form-control mb-2" id="initialsInput" placeholder="Enter Initials">
                           </div>
             
                           <div class="col-auto">
-                            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                            <button type="submit" class="btn btn-primary mb-2" id="submitScoreButton">Submit Score</button>
                           </div>
 
                         </div>
