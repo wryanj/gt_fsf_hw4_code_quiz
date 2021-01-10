@@ -124,10 +124,10 @@ var quizQuestions = [
 
         //Start The Countdown Clock timer..
             //Call the startCountdown function defined below 
-            return startCountdown();
+            return countdown();
 
             //startCoundown function..
-            function startCountdown(){
+            function countdown(){
                 console.log("Nested startCountdown() function started")
                 timerCount = 30;
                 countdownClock.textContent = timerCount;
@@ -145,8 +145,9 @@ var quizQuestions = [
                         clearInterval(timeInterval);
                         //Once time gets to zero (its equal to 0), display 0
                         countdownClock.textContent = "0";
-                        //and alert the user that the time has expired..
+                        // alert the user that the time has expired..
                         alert ("Time's Up!");
+                        // call the function to show score and log results--HOW
                     }
                 }, 1000)
             }
@@ -269,13 +270,10 @@ var quizQuestions = [
 
                 // Wait 1 Second and call the render quiz question function again 
                 return setTimeout(renderQuizQuestion, 1000);
+        }  
+    }
 
-        }
-        
-
-           
-
-    //When game is finished (timer expires OR question sequence completes)...
+      //When game is finished (timer expires OR question sequence completes)...
 
         //Present High Score From That Round to The User
 
@@ -298,4 +296,4 @@ var quizQuestions = [
                     //Clear local storage
 
                     //Return to Start of Quiz
-    }
+    
