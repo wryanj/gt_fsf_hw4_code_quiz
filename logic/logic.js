@@ -129,7 +129,7 @@ var quizQuestions = [
             //startCoundown function..
             function startCountdown(){
                 console.log("Nested startCountdown() function started")
-                timerCount = 500;
+                timerCount = 30;
                 countdownClock.textContent = timerCount;
 
                 //Use set Interval Method to call function to execute every 1000 milleseconds
@@ -259,6 +259,7 @@ var quizQuestions = [
                 console.log("Current Score Is " + scoreCount);
 
             //Decrement the Timer 10 Seconds
+                timerCount = timerCount-10;
 
             //Render the next question..
 
@@ -270,25 +271,6 @@ var quizQuestions = [
                 return setTimeout(renderQuizQuestion, 1000);
 
         }
-        
-
-      
-
-
-
-
-                
-            
-            //If submitted option is incorrect
-
-                //Display the Text "NOPE!"...
-
-                //Reduced the Score Count...
-
-                //Decrease Timer By "10" Seconds...
-
-                //Advance to Next Question
-
         
 
            

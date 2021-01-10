@@ -3,6 +3,10 @@
     font-weight: bold;
 }
 
+.myItalic {
+    font-style: italic;
+}
+
 .correct {
     color: green;
 }
