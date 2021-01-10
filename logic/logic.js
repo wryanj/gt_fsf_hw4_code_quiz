@@ -83,8 +83,10 @@ var quizQuestions = [
 //Define Event Listners and Handlers to Trigger Important Functions
 
     //Start Button
-        //When Start Button is Clicked, Start Quiz
-        startButton.addEventListener("click", startQuiz);
+        //When Start Button is Clicked, Display the quiz content div
+        startButton.addEventListener("click", displayQuiz);
+        //When Start Button is Clicked, start the countdown function
+        startButton.addEventListener("click", countdown);
         //When Start Button is Clicked, render quiz question for the first time
         startButton.addEventListener("click", renderQuizQuestion);
 
@@ -108,7 +110,7 @@ var quizQuestions = [
 
 
     //When Start Button Is Clicked, Start The Quiz (Display Questions Div HTML, Start Countdown)....
-    function startQuiz() {
+    function displayQuiz() {
 
         console.log("Start Button Clicked and startQuiz() Function Called");
 
@@ -121,37 +123,34 @@ var quizQuestions = [
         //Show the quizContentContainer..
         quizContentContainer.classList.remove("d-none");
         console.log("Quiz Content Container Displayed")
-
-        //Start The Countdown Clock timer..
-            //Call the startCountdown function defined below 
-            return countdown();
-
-            //startCoundown function..
-            function countdown(){
-                console.log("Nested startCountdown() function started")
-                timerCount = 30;
-                countdownClock.textContent = timerCount;
-
-                //Use set Interval Method to call function to execute every 1000 milleseconds
-                var timeInterval = setInterval(function () {
-                    //As long as time is left on the clock...
-                    if (timerCount > 0) {
-                        //Show remaining seconds on countdown clock...
-                        countdownClock.textContent = timerCount;
-                        //Decrement the Timer Count by 1...
-                        timerCount--;
-                    } else {
-                        //clear the interval with the clearInterval method
-                        clearInterval(timeInterval);
-                        //Once time gets to zero (its equal to 0), display 0
-                        countdownClock.textContent = "0";
-                        // alert the user that the time has expired..
-                        alert ("Time's Up!");
-                        // call the function to show score and log results--HOW
-                    }
-                }, 1000)
-            }
     }
+    
+    //Start The Countdown Clock timer..
+    function countdown(){
+        console.log("Nested startCountdown() function started")
+        timerCount = 30;
+        countdownClock.textContent = timerCount;
+
+        //Use set Interval Method to call function to execute every 1000 milleseconds
+        var timeInterval = setInterval(function () {
+            //As long as time is left on the clock...
+            if (timerCount > 0) {
+                //Show remaining seconds on countdown clock...
+                countdownClock.textContent = timerCount;
+                //Decrement the Timer Count by 1...
+                timerCount--;
+            } else {
+                //clear the interval with the clearInterval method
+                clearInterval(timeInterval);
+                //Once time gets to zero (its equal to 0), display 0
+                countdownClock.textContent = "0";
+                // alert the user that the time has expired..
+                alert ("Time's Up!");
+                // call the function to show score and log results--HOW
+            }
+        }, 1000)
+    }
+    
 
     //Once Quiz is Started, Render First Quiz Question and Answer Choices (Make Re-Usable Function When Submit Is Clicked)
     function renderQuizQuestion (){
