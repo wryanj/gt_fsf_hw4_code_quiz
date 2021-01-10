@@ -26,52 +26,56 @@ var finalScore = document.querySelector("#displayScore");
 var scoreCount = 0;
 
 //Define Quiz Questions Array And Related Quiz Variables
+var runningQuestionIndex = 0;
+var selectedOption;
 var quizQuestions = [
     {
-        questionName: "Question 1",
+        questionName: "Question 0",
         questionText: "What do you call a variable that can only have a true or false value?",
         optionA: "An Array",
         optionB: "A Bi-Conditional Variable",
         optionC: "A Kitty",
+        optionD: "A Boolean",
         correctOption: "A Boolean"
     },
     {
-        questionName: "Question 2",
+        questionName: "Question 1",
         questionText: "Bootsrap is...",
         optionA: "A library of javascript",
         optionB: "A Type of CSS Selector",
         optionC: "A window method to replace certain CSS classes",
+        optionD: "a library of CSS accessible via use of pre-defined classes" ,
         correctOption: "a library of CSS accessible via use of pre-defined classes" 
     },
     {
-        questionName: "Question 3",
+        questionName: "Question 2",
         questionText: "Jquery is...",
         optionA: "A library of javascript",
         optionB: "A Type of CSS Selector",
         optionC: "A window method to replace certain CSS classes",
+        optionD: "a library of CSS accessible via use of pre-defined classes" ,
         correctOption: "a library of CSS accessible via use of pre-defined classes" 
     },
     {
-        questionName: "Question 4",
+        questionName: "Question 3",
         questionText: "What is an Array",
         optionA: "A library of javascript",
         optionB: "A Type of CSS Selector",
         optionC: "A window method to replace certain CSS classes",
-        correctOption: "a library of CSS accessible via use of pre-defined classes" 
+        optionD: "a library of CSS accessible via use of pre-defined classes", 
+        correctOption: "a library of CSS accessible via use of pre-defined classes"
     },
     {
-        questionName: "Question 5",
+        questionName: "Question 4",
         questionText: "What is an Array",
         optionA: "A variable containing a single value",
         optionB: "A Type of CSS Selector",
         optionC: "An ordered list that is displayed on an HTML page",
+        optionD: "A variable containing multiple values",
         correctOption: "A variable containing multiple values" 
-    },
+    }
 ]
-
-    var runningQuestionIndex = 0;
-    var currentQuestion = quizQuestions[runningQuestionIndex];
-    var selectedOption;
+   
 
 //Define Event Listners and Handlers to Trigger Important Functions
 
@@ -88,7 +92,7 @@ var quizQuestions = [
 
 //Define Program Logic & Sequence
 
-    //When Page Is initialized...log a message to the console its initialized
+    //When Page Is initialized...log a message to the console its initialized. This is called via onload attribute in body elemenet of html
     function init() {
         console.log("Page Loaded and Init() Function Called")
     }
@@ -147,25 +151,30 @@ var quizQuestions = [
 
     //Once Quiz is Started, Render First Quiz Question and Answer Choices (Make Re-Usable Function When Submit Is Clicked)
     function renderQuizQuestion (){
-        console.log("first render question function started")
+        console.log("Render Quiz Question Function Has Been Invoked. Running Index For Quiz Question is now set to " + runningQuestionIndex); //On second call this shows what I want, index up by 1...
+        console.log (quizQuestions[runningQuestionIndex].questionName);
 
         //Make Sure submissionResultContainer is hidden
         submissionResultContainer.classList.add("d-none");
         console.log("submissionResultContainer Hidden");
 
+        //Clear old checked properties
+        for (i = 0, length = radioQuestions.length; i < length; i++) {
+            radioQuestions[i].checked = false;
+         } 
+
         //Populate the currentQuestion and choices to the form text choices field
-        activeQuizQuestion.textContent = currentQuestion.questionText;
-        activeOption1.textContent = currentQuestion.optionA;
-        activeOption1Value.setAttribute("value", currentQuestion.optionA);
-        activeOption2.textContent = currentQuestion.optionB;
-        activeOption2Value.setAttribute("value", currentQuestion.optionB);
-        activeOption3.textContent = currentQuestion.optionC;
-        activeOption3Value.setAttribute("value", currentQuestion.optionC);
-        activeOption4.textContent = currentQuestion.correctOption;
-        activeOption4Value.setAttribute("value", currentQuestion.correctOption);
+        activeQuizQuestion.textContent = (quizQuestions[runningQuestionIndex].questionText);
+        activeOption1.textContent = (quizQuestions[runningQuestionIndex].optionA);
+        activeOption1Value.setAttribute("value", quizQuestions[runningQuestionIndex].optionA);
+        activeOption2.textContent = (quizQuestions[runningQuestionIndex].optionB);
+        activeOption2Value.setAttribute("value", quizQuestions[runningQuestionIndex].optionB);
+        activeOption3.textContent = (quizQuestions[runningQuestionIndex].optionC);
+        activeOption3Value.setAttribute("value", quizQuestions[runningQuestionIndex].optionC);
+        activeOption4.textContent = (quizQuestions[runningQuestionIndex].optionD);
+        activeOption4Value.setAttribute("value", quizQuestions[runningQuestionIndex].optionD);
     }
 
-    
     //After first question is displayed, Upon Click of Submit Answer Button....
 
     //Check if answer is correct by
@@ -193,9 +202,9 @@ var quizQuestions = [
 
         //If submitted option is correct...
         console.log("the selected answer I have to work with ahead of checking for correct is " + selectedOption);
-        console.log("the correct answer for the current question I have is " + currentQuestion.correctOption);
+        console.log("the correct answer for the current question I have is " + quizQuestions[runningQuestionIndex].correctOption);
             
-        if (selectedOption === currentQuestion.correctOption) {
+        if (selectedOption === quizQuestions[runningQuestionIndex].correctOption) {
             //Display green text "correct"!
 
                 //Show the submissionResultContainer
@@ -213,18 +222,18 @@ var quizQuestions = [
                 console.log("Current Score Is " + scoreCount);
 
             //Render the next question..
+
+                // Up the running question index by 1...
+                runningQuestionIndex++;
+                console.log("Running question index is now set to " + runningQuestionIndex);
+
+                // Wait 1 Second and call the render quiz question function again 
+                return setTimeout(renderQuizQuestion, 1000);
             
         }
         
 
-        //Display Text "Correct!"..
-
-        //Up The Score Count...
-
-            //Advance to the Next Question (up the running array index, then use render quiz question with that array)
-            //runningQuestionIndex++;
-            //renderQuizQuestion();
-    }
+      
 
 
 
@@ -268,3 +277,4 @@ var quizQuestions = [
                     //Clear local storage
 
                     //Return to Start of Quiz
+    }
