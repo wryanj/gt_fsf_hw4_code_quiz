@@ -8,12 +8,15 @@ var endingScreenContainer = document.querySelector("#endingScreenContainer");
 //Define Elemenets I want To Manipulate in HTML and Retrieve Them using QuerySelector Method, Then assign their value to a variable for use in script
 var getHighScore = document.querySelector("#getHighScore");
 var startButton = document.querySelector("#startButton"); 
+var submitAnswerButton = document.querySelector("#submitAnswerButton");
 var countdownClock = document.querySelector("#countdownClock");
 var activeQuizQuestion = document.querySelector("#activeQuizQuestion");
 var activeOption1 = document.querySelector("#activeOption1");
 var activeOption2 = document.querySelector("#activeOption2");
 var activeOption3 = document.querySelector("#activeOption3");
 var activeOption4 = document.querySelector("#activeOption4");
+var radioQuestions = document.querySelectorAll(".form-check-input");
+    console.log("number of radio button elemenets detected is " + radioQuestions.length);
 var finalScore = document.querySelector("#displayScore");
 
 //Define Quiz Questions Array And Related Quiz Variables
@@ -21,10 +24,10 @@ var quizQuestions = [
     {
         questionName: "Question 1",
         questionText: "What do you call a variable that can only have a true or false value?",
-        optionA: "Array",
-        optionB: "Bi-Conditional Variable",
-        optionC: "Cat",
-        correctOption: "Boolean"
+        optionA: "An Array",
+        optionB: "A Bi-Conditional Variable",
+        optionC: "A Kitty",
+        correctOption: "A Boolean"
     },
     {
         questionName: "Question 2",
@@ -70,6 +73,11 @@ var runningQuestionIndex = 0;
         //When Start Button is Clicked, render quiz question for the first time
         startButton.addEventListener("click", renderQuizQuestion);
 
+    //Submit Button
+        //When Submit Answer Button is Clicked, Call The checkAnswer Function
+        submitAnswerButton.addEventListener("click", checkAnswer);
+
+
 //Define Program Logic & Sequence
 
     //When Page Is initialized...log a message to the console its initialized
@@ -105,7 +113,7 @@ var runningQuestionIndex = 0;
             //startCoundown function..
             function startCountdown(){
                 console.log("Nested startCountdown() function started")
-                var timerCount = 60;
+                var timerCount = 500;
                 countdownClock.textContent = timerCount;
 
                 //Use set Interval Method to call function to execute every 1000 milleseconds
@@ -132,19 +140,37 @@ var runningQuestionIndex = 0;
     function renderQuizQuestion (){
         console.log("first render question function started")
         var q = quizQuestions[runningQuestionIndex];
-             activeQuizQuestion.textContent = q.questionText;
+            activeQuizQuestion.textContent = q.questionText;
             activeOption1.textContent = q.optionA;
             activeOption2.textContent = q.optionB;
             activeOption3.textContent = q.optionC;
             activeOption4.textContent = q.correctOption;
             }
 
+    //Once Quiz is Started, Upon Click of Submit Answer Button....(THIS NEEDS TO BE LOOPED)
 
-    //Once Quiz is Started, Upon Click of Submit Answer Button....
+        //Check if answer is correct
+        function checkAnswer(){
+        console.log("checkAnswer function called")
 
-        //Compare submitted option to correct option for question
+            //Check what option was submitted by looping through all form input elements class using queryselectorall method
+
+                //Run this loop until I detect a selected option
+                for (i = 0, length = radioQuestions.length; i < length; i++) {
+                    //if the radio question is checked...
+                    if (radioQuestions[i].checked) {
+                        //log to console what the value is that I detected..
+                        console.log("Detected answer for last question is " + radioQuestions[i].value);
+                        //assign that value to a local variable..
+                        var selectedOption = radioQuestions[i].value;
+                        //and break the loop
+                        break;
+                    }
+ //REVIEW                 //if no radio question is checked...--HOW TO HANDLE THIS?
+                }
 
             //If submitted option is correct...
+        
 
                 //Display Text "Correct!"..
 
@@ -164,6 +190,10 @@ var runningQuestionIndex = 0;
                 //Decrease Timer By "10" Seconds...
 
                 //Advance to Next Question
+
+        }
+
+           
 
     //When game is finished (timer expires OR question sequence completes)...
 
