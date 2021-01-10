@@ -64,7 +64,11 @@ var lastQuestionIndex = quizQuestions.length-1;
 var runningQuestionIndex = 0;
 
 //Define Event Listners and Handlers to Trigger Important Functions
-startButton.addEventListener("click", startQuiz);
+    //Start Button
+        //When Start Button is Clicked, Start Quiz
+        startButton.addEventListener("click", startQuiz);
+        //When Start Button is Clicked, render quiz question for the first time
+        startButton.addEventListener("click", renderQuizQuestion);
 
 //Define Program Logic & Sequence
 
@@ -80,7 +84,7 @@ startButton.addEventListener("click", startQuiz);
         //Display the Initials and High Scores to the User...
 
 
-    //When Start Button Is Clicked, Start The Quiz (Display Questions Div HTML, Start Countdown, Display First Question & Answers)....
+    //When Start Button Is Clicked, Start The Quiz (Display Questions Div HTML, Start Countdown)....
     function startQuiz() {
         console.log("Start Button Clicked and startQuiz() Function Called");
 
@@ -101,7 +105,7 @@ startButton.addEventListener("click", startQuiz);
             //startCoundown function..
             function startCountdown(){
                 console.log("Nested startCountdown() function started")
-                var timerCount = 3;
+                var timerCount = 60;
                 countdownClock.textContent = timerCount;
 
                 //Use set Interval Method to call function to execute every 1000 milleseconds
@@ -122,40 +126,44 @@ startButton.addEventListener("click", startQuiz);
                     }
                 }, 1000)
             }
+    }
 
-        //Render First Quiz Question and Answer Choices (Make Re-Usable Function When Submit Is Clicked)
-        function renderInitialQuizQuestion (){
-            var q = quizQuestions[runningQuestionIndex];
-            activeQuizQuestion.textContent = q.questionText;
+    //Render First Quiz Question and Answer Choices (Make Re-Usable Function When Submit Is Clicked)
+    function renderQuizQuestion (){
+        console.log("first render question function started")
+        var q = quizQuestions[runningQuestionIndex];
+             activeQuizQuestion.textContent = q.questionText;
             activeOption1.textContent = q.optionA;
             activeOption2.textContent = q.optionB;
             activeOption3.textContent = q.optionC;
             activeOption4.textContent = q.correctOption;
-        }
-    }
+            }
 
 
     //Once Quiz is Started, Upon Click of Submit Answer Button....
 
         //Compare submitted option to correct option for question
 
-        //If submitted option is correct...
+            //If submitted option is correct...
 
-            //Display Text "Correct!"..
+                //Display Text "Correct!"..
 
-            //Up The Score Count...
+                //Up The Score Count...
 
-            //Advance to the Next Question
-        
-        //If submitted option is incorrect
+                //Advance to the Next Question (up the running array index, then use render quiz question with that array)
+                //runningQuestionIndex++;
+                //renderQuizQuestion();
+                
+            
+            //If submitted option is incorrect
 
-            //Display the Text "NOPE!"...
+                //Display the Text "NOPE!"...
 
-            //Reduced the Score Count...
+                //Reduced the Score Count...
 
-            //Decrease Timer By "10" Seconds...
+                //Decrease Timer By "10" Seconds...
 
-            //Advance to Next Question
+                //Advance to Next Question
 
     //When game is finished (timer expires OR question sequence completes)...
 

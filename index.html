@@ -51,9 +51,9 @@
 
             <!--(Quiz Question, Answer Options, Submit Answer Button) Variable Display-->
             <div class = "row mb-4 d-none" id="quizContentContainer"> <!--USE d-none to Hide This Until Otherwise Changed by the JS Script-->
-                <div class="col-md text-center">
+                <div class="col-md">
                     <div>
-                        <p class="myBold" id="activeQuizQuestion">Enter Question Text Here InnerHTML</p>
+                        <p class="myBold text-center" id="activeQuizQuestion">Enter Question Text Here InnerHTML</p>
                     </div>
 
                     <form class="mb-4">
@@ -65,7 +65,7 @@
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                            <label class="form-check-label" for="exampleRadios2" id="activeOption1">
+                            <label class="form-check-label" for="exampleRadios2" id="activeOption2">
                               Option 2
                             </label>
                         </div>
@@ -77,14 +77,16 @@
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option4">
-                            <label class="form-check-label" for="exampleRadios2" id="activeOption1">
+                            <label class="form-check-label" for="exampleRadios2" id="activeOption4">
                               Option 4
                             </label>
                         </div>
                     </form>
 
                     <!--Submit Button-->
-                    <button type="button" class="btn btn-success">Submit Answer</button>
+                    <button type="button" class="btn btn-success text-center">Submit Answer</button>
+                    
+                    
                 </div>
             </div>
 
