@@ -147,7 +147,7 @@ var runningQuestionIndex = 0;
             activeOption4.textContent = q.correctOption;
             }
 
-    //Once Quiz is Started, Upon Click of Submit Answer Button....(THIS NEEDS TO BE LOOPED)
+ //REVIEW    //Once Quiz is Started, Upon Click of Submit Answer Button....(THIS NEEDS TO BE LOOPED)
 
         //Check if answer is correct
         function checkAnswer(){
@@ -161,7 +161,7 @@ var runningQuestionIndex = 0;
                     if (radioQuestions[i].checked) {
                         //log to console what the value is that I detected..
                         console.log("Detected answer for last question is " + radioQuestions[i].value);
-                        //assign that value to a local variable..
+ //REVIEW- selectedOption ok to be local?  //assign that value to a local variable..
                         var selectedOption = radioQuestions[i].value;
                         //and break the loop
                         break;
