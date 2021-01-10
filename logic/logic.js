@@ -152,40 +152,42 @@ var runningQuestionIndex = 0;
             activeOption3Value.setAttribute("value", q.optionC);
             activeOption4.textContent = q.correctOption;
             activeOption4Value.setAttribute("value", q.correctOption);
-            }
+    }
 
  //REVIEW    //Once Quiz is Started, Upon Click of Submit Answer Button....(THIS NEEDS TO BE LOOPED)
 
-        //Check if answer is correct
-        function checkAnswer(){
+    //Check if answer is correct
+    function checkAnswer(){
         console.log("checkAnswer function called")
+        //If a radio button is checked, run through each option to detect the selected answer...
+        if (activeOption1Value.checked===true || activeOption2Value.checked===true || activeOption3Value.checked===true || activeOption4Value.checked===true) {
+            for (i = 0, length = radioQuestions.length; i < length; i++) {
+                //if the radio question is checked...
+                if (radioQuestions[i].checked) {
+                    //set the selectedOption variable value equal to the value of the selected radio button...
+                    var selectedOption = radioQuestions[i].value;
+                    console.log("Selected Option Variable set to " + selectedOption);
+                    //and break the loop
+                    break;
+                 }
+            }   
+        } 
+        else {
+            alert("Please select an option");
+            return;
+        }
+    }
 
-            //Check what option was submitted by looping through all form input elements class using queryselectorall method
-
-                //Run this loop until I detect a selected option
-                for (i = 0, length = radioQuestions.length; i < length; i++) {
-                    //if the radio question is checked...
-                    if (radioQuestions[i].checked) {
-                        //log to console what the value is that I detected..
-                        console.log("Detected answer for last question is " + radioQuestions[i].value);
- //REVIEW- selectedOption ok to be local?  //assign that value to a local variable..
-                        var selectedOption = radioQuestions[i].value;
-                        //and break the loop
-                        break;
-                    }
- //REVIEW                 //if no radio question is checked...--HOW TO HANDLE THIS?
-                }
-
-            //If submitted option is correct...
+     //If submitted option is correct...
         
 
-                //Display Text "Correct!"..
+        //Display Text "Correct!"..
 
-                //Up The Score Count...
+        //Up The Score Count...
 
-                //Advance to the Next Question (up the running array index, then use render quiz question with that array)
-                //runningQuestionIndex++;
-                //renderQuizQuestion();
+            //Advance to the Next Question (up the running array index, then use render quiz question with that array)
+            //runningQuestionIndex++;
+            //renderQuizQuestion();
                 
             
             //If submitted option is incorrect
@@ -198,7 +200,7 @@ var runningQuestionIndex = 0;
 
                 //Advance to Next Question
 
-        }
+        
 
            
 
