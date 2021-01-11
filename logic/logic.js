@@ -4,6 +4,7 @@ var timerCount;
 var runningQuestionIndex = 0;
 var selectedOption;
 var scoreCount = 0;
+var finalScoreCount;
 var userInitials;
 
 //Define Variables For Key Containers to Hide or Unhide Through The Program
@@ -296,8 +297,14 @@ var quizQuestions = [
         submissionResultContainer.classList.add("d-none");
         logQuizScoreContainer.classList.remove("d-none");
 
+        //Create the Final Score For The User, Which is the Score Count + The remaining seconds for high score variation
+        finalScoreCount = scoreCount+timerCount;
+        console.log("Raw Score = " + scoreCount);
+        console.log("Bonus points for time remaining = " + timerCount);
+        console.log("Final Score = " + finalScoreCount);
+        
         //Present the users score to them
-        finalScore.textContent = scoreCount;
+        finalScore.textContent = finalScoreCount;
     }
 
     //Upon click of the submit Submit Score Button...
@@ -312,7 +319,7 @@ var quizQuestions = [
             //Store the initials and score locally, and then reset the variable values for next round..
 
                 //Save user entered initials and user score (current scorecount) using "storedScore" as key
-                localStorage.setItem("storedScore", userInitials + " : " + scoreCount);
+                localStorage.setItem("storedScore", userInitials + " : " + finalScoreCount);
 
                 //Once saved, reset the variable for user initials to an empty string and scorecount back to 0...
                 userInitials="";
