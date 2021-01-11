@@ -14,7 +14,7 @@ var logQuizScoreContainer = document.querySelector("#logQuizScoreContainer");
 var endingScreenContainer = document.querySelector("#endingScreenContainer");
 
 //Define Variables For Key Elemenets I Want to Reference Or Manipulate Through The Program
-var getHighScore = document.querySelector("#getHighScore");
+var getHighScoresButton = document.querySelector("#getHighScore");
 var startQuizButton = document.querySelector("#startQuizButton");
 var submitAnswerButton = document.querySelector("#submitAnswerButton");
 var countdownClock = document.querySelector("#countdownClock");
@@ -33,6 +33,8 @@ var finalScore = document.querySelector("#finalScore");
 var initialsInput = document.querySelector("#initialsInput");
 var submitScoreButton = document.querySelector("#submitScoreButton");
 var highScoresList = document.querySelector("#highScoresList");
+var goBackButton = document.querySelector("#goBackButton");
+
 
 //Define Array For Quiz Question Objects I Will Use In The Program
 var quizQuestions = [
@@ -101,6 +103,13 @@ var quizQuestions = [
         //When Submit Score button is clicked, call the logQuizScore function
         submitScoreButton.addEventListener("click", logQuizScore);
 
+    //Get High Scores Button
+        //When Get High Scores Button is Pressed, call the displayHighScores function
+        getHighScoresButton.addEventListener("click", displayHighScores);
+
+    //Go Back Button
+        goBackButton.addEventListener("click", goBack);
+
 
 //Define Program Logic & Key Functions
 
@@ -108,15 +117,6 @@ var quizQuestions = [
     function init() {
         console.log("Page loaded and init() function invoked")
     }
-
-    //When Get High Scores Button is Clicked...
-
-        //Display the Initials and High Scores to the User...
-
-            // Show the ending screen container and hide the welcome screen container...
-
-            //Ensure the locally stored scores are converted between string / objects using json stringify and json parse, and displayed..
-
 
     //When Start Button Is Clicked, Start The Quiz (Display Questions Div HTML, Start Countdown)....
     function displayQuiz() {
@@ -318,9 +318,9 @@ var quizQuestions = [
             
             // Call the displayHighScores Global Function
             displayHighScores();
+        }
 
-
-        //Display the storeScores within the field for scores as divs..
+        //Upon completion of the logQuizScore functoin (after submit score button pressed) OR upon press of the Get High Scores Button...
         function displayHighScores(){
             console.log("displayHighScores() function invoked");
 
@@ -328,8 +328,9 @@ var quizQuestions = [
             var storedScores = localStorage.getItem("storedScore");
             console.log("Retrieved Scores Are " + storedScores);
 
-            //Hide the logQuizScore container and display the endingScreenContainer
+            //Hide the logQuizScore container and display the endingScreenContainer (If clicked From Start, Hide the Welcome Screen Container)
             logQuizScoreContainer.classList.add("d-none");
+            welcomeScreenContainer.classList.add("d-none");
             endingScreenContainer.classList.remove("d-none");
 
             //Create a new div element as a variable
@@ -342,16 +343,20 @@ var quizQuestions = [
             highScoresList.appendChild(newScoreE);
         }
 
-
-
-        
-
-
+    // When The Go Back Button is Pressed...Re-load the page to take you to start screen (onload html body attribute triggers init function)
+    function goBack() {
+        console.log("goBack() function invoked")
+        location.reload();
     }
+    
+    // When the Clear high Scores Button is Pressed
 
-     //When the Clear High Scores Button Is Clicked
 
-     //When the Go Back Button Is Clicked
+
+
+   
+
+
 
        
 
