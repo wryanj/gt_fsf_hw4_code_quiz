@@ -34,6 +34,7 @@ var initialsInput = document.querySelector("#initialsInput");
 var submitScoreButton = document.querySelector("#submitScoreButton");
 var highScoresList = document.querySelector("#highScoresList");
 var goBackButton = document.querySelector("#goBackButton");
+var clearHighScoresButton = document.querySelector("#clearHighScoresButton");
 
 
 //Define Array For Quiz Question Objects I Will Use In The Program
@@ -88,27 +89,25 @@ var quizQuestions = [
 //Define Event Listners and Handlers to Trigger Important Functions
 
     //Start Quiz Button
-        //When Start Button is Clicked, Display the quiz content div
-        startQuizButton.addEventListener("click", displayQuiz);
-        //When Start Button is Clicked, start the countdown function
-        startQuizButton.addEventListener("click", countdown);
-        //When Start Button is Clicked, render quiz question for the first time
-        startQuizButton.addEventListener("click", renderQuizQuestion);
+    startQuizButton.addEventListener("click", displayQuiz);
+    startQuizButton.addEventListener("click", countdown);
+    startQuizButton.addEventListener("click", renderQuizQuestion);
 
     //Submit Answer Button
-        //When Submit Answer Button is Clicked, Call The checkAnswer Function
-        submitAnswerButton.addEventListener("click", checkAnswer);
+    submitAnswerButton.addEventListener("click", checkAnswer);
     
     //Submit Score Button
-        //When Submit Score button is clicked, call the logQuizScore function
-        submitScoreButton.addEventListener("click", logQuizScore);
+    submitScoreButton.addEventListener("click", logQuizScore);
 
     //Get High Scores Button
-        //When Get High Scores Button is Pressed, call the displayHighScores function
-        getHighScoresButton.addEventListener("click", displayHighScores);
+    getHighScoresButton.addEventListener("click", displayHighScores);
 
     //Go Back Button
-        goBackButton.addEventListener("click", goBack);
+    goBackButton.addEventListener("click", goBack);
+
+    //Clear High Scores Button
+    clearHighScoresButton.addEventListener("click", clearHighScores);
+
 
 
 //Define Program Logic & Key Functions
@@ -122,7 +121,8 @@ var quizQuestions = [
     function displayQuiz() {
         console.log("displayQuiz() function invoked");
 
-        //Shuffle the Questions Order? |REVISIT|
+        //Dispable the Get High Scores Button (so users cannot bring up this in the middle of the quiz)
+        getHighScoresButton.disabled = true;
 
         //Hide The welcomeScreenContainer Screen & Display The Quiz Div..
         welcomeScreenContainer.classList.add("d-none");
@@ -358,7 +358,16 @@ var quizQuestions = [
         location.reload();
     }
     
-    // When the Clear high Scores Button is Pressed
+    // When the Clear high Scores Button is Pressed..
+    function clearHighScores() {
+        console.log("clearHighScores() function invoked");
+
+        //Clear local storage on window..
+        localStorage.clear();
+
+        //Reset the innerHTML of the highSCo
+        highScoresList.innerHTML="";
+    }
 
 
 
