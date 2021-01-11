@@ -1,17 +1,18 @@
 
-//Declare Global Variables
+//Declare Global Variables I Will Use in the Program
 var timerCount;
 var runningQuestionIndex = 0;
 var selectedOption;
+var scoreCount = 0;
 
-//Key Containers to Hide or Unhide Through Process
+//Define Variables For Key Containers to Hide or Unhide Through The Program
 var welcomeScreenContainer = document.querySelector("#welcomeScreenContainer");
 var quizContentContainer = document.querySelector("#quizContentContainer");
 var submissionResultContainer = document.querySelector("#submissionResultContainer");
 var logQuizScoreContainer = document.querySelector("#logQuizScoreContainer");
 var endingScreenContainer = document.querySelector("#endingScreenContainer");
 
-//Define Elemenets I want To Reference or Manipulate in HTML and Retrieve Them using QuerySelector Method, Then assign their value to a variable for use in script
+//Define Variables For Key Elemenets I Want to Reference Or Manipulate Through The Program
 var getHighScore = document.querySelector("#getHighScore");
 var startQuizButton = document.querySelector("#startQuizButton");
 var submitAnswerButton = document.querySelector("#submitAnswerButton");
@@ -28,12 +29,11 @@ var activeOption4Value = document.querySelector("#radio4");
 var radioQuestions = document.querySelectorAll(".form-check-input");
 var submissionResultText = document.querySelector("#submissionResultText");
 var finalScore = document.querySelector("#finalScore");
-var scoreCount = 0;
 var initialsInput = document.querySelector("#initialsInput");
 var submitScoreButton = document.querySelector("#submitScoreButton");
 var highScoresList = document.querySelector("highScoresList");
 
-//Define Quiz Questions Array
+//Define Array For Quiz Question Objects I Will Use In The Program
 var quizQuestions = [
     {
         questionName: "Question 0",
@@ -81,6 +81,8 @@ var quizQuestions = [
         correctOption: "A For Loop" 
     }
 ]
+    //Log the Array Length Detected by Browser
+    console.log("Detected Number of Quiz Questions = " + quizQuestions.length);
    
 //Define Event Listners and Handlers to Trigger Important Functions
 
@@ -101,18 +103,20 @@ var quizQuestions = [
         submitScoreButton.addEventListener("click", logQuizScore);
 
 
-//Define Program Logic & Sequence
+//Define Program Logic & Key Functions
 
     //When Page Is initialized...log a message to the console its initialized. This is called via onload attribute in body elemenet of html
     function init() {
-        console.log("Page Loaded and Init() Function Called")
+        console.log("Page loaded and Init() function invoked")
     }
 
     //When Get High Scores Button is Clicked...
 
-        //Retrieve High Scores and Initials From Local Storage (as an string converted back to object using JSON.parse method)...
-
         //Display the Initials and High Scores to the User...
+
+            // Show the ending screen container and hide the welcome screen container...
+
+            //Ensure the locally stored scores are converted between string / objects using json stringify and json parse, and displayed..
 
 
     //When Start Button Is Clicked, Start The Quiz (Display Questions Div HTML, Start Countdown)....
@@ -123,11 +127,9 @@ var quizQuestions = [
 
         //Hide The welcomeScreenContainer Screen & Display The Quiz Div..
         welcomeScreenContainer.classList.add("d-none");
-        console.log("Welcome Screen Container Hidden")
 
         //Show the quizContentContainer..
         quizContentContainer.classList.remove("d-none");
-        console.log("Quiz Content Container Displayed")
     }
     
     //Start The Countdown Clock timer..
@@ -135,24 +137,44 @@ var quizQuestions = [
         console.log("countdown() function invoked")
         timerCount = 30;
         countdownClock.textContent = timerCount;
+        console.log ("Number of Quiz Questions = " + quizQuestions.length);
+        console.log ("Current running index of quiz question " + runningQuestionIndex);
+        
 
-        //Use set Interval Method to call function to execute every 1000 milleseconds
+        //Use set Interval Method to call function to execute every 1000 milleseconds (Every 1 Second)
         var timeInterval = setInterval(function () {
-            //As long as time is left on the clock...
-            if (timerCount > 0) {
+
+            //If there is time left on the clock, and not all questions have been answered yet...
+            if (timerCount > 0 && runningQuestionIndex < quizQuestions.length) {
                 //Show remaining seconds on countdown clock...
                 countdownClock.textContent = timerCount;
                 //Decrement the Timer Count by 1...
                 timerCount--;
-            } else {
-                //clear the interval with the clearInterval method
-                clearInterval(timeInterval);
-                //Once time gets to zero (its equal to 0), display 0
-                countdownClock.textContent = "0";
-                // alert the user that the time has expired..
-                alert ("Time's Up!");
-                // call the function to show the final score and gather intiials
-                presentFinalQuizScore();
+            }
+            //If there is NOT time left on the clock, or all the quiz questions have been answered, do one of two things depending on the condition that is false...
+            else {
+                //If all the questions HAVE been answered (running questions index is greater than or equal to the number of quiz questions)
+                if (runningQuestionIndex >= quizQuestions.length) {
+                    //clear the interval with the clearInterval method
+                    clearInterval(timeInterval);
+                    // Set an empty string to the value of the countdown field
+                    countdownClock.textContent = "";
+                    // alert the user they finished..
+                    alert ("Congratulations! You finished before time expired! Click ok to log your score.");
+                    // and call the function to show the final score and gather intiials
+                    presentFinalQuizScore();
+                }
+                //If all the questions are not answered, but time has expired (meaning zero is not less than timercount anymore whic makes the original if statement false)
+                else{
+                    //clear the interval with the clearInterval method
+                    clearInterval(timeInterval);
+                    // Set an empty string to the value of the countdown field
+                    countdownClock.textContent = "";
+                    // alert the user that the time has expired..
+                    alert ("Time's Up! Click ok to log your score.");
+                    // and call the function to show the final score and gather intiials
+                    presentFinalQuizScore();
+                }
             }
         }, 1000)
     }
@@ -161,6 +183,7 @@ var quizQuestions = [
     //Once Quiz is Started, Render First Quiz Question and Answer Choices (Make Re-Usable Function When Submit Is Clicked)
     function renderQuizQuestion (){
         console.log("renderQuizQuestion Function Has Been invoked");
+        console.log("running questions index " + runningQuestionIndex)
 
         //Make Sure submissionResultContainer is hidden
         submissionResultContainer.classList.add("d-none");
@@ -286,9 +309,11 @@ var quizQuestions = [
     function logQuizScore(){
         console.log("logQuizScore() function has been invoked")
 
-        //Collect the users initials from the form as a local variable
+        //Collect the users initials from the form as a local variable..
         console.log(initialsInput.value);
         var userInitials = initialsInput.value;
+
+//Investigate //Store the initials and score locally..
 
         //Display the latest list of initials and high scores...
 
@@ -296,7 +321,7 @@ var quizQuestions = [
             logQuizScoreContainer.classList.add("d-none");
             endingScreenContainer.classList.remove("d-none");
 
-            //Append the latest stuff to the screen
+//Create Elemenet Then Pre-pend!            //Append the latest stuff to the screen
             highScoresList.append(userInitials, finalScore);
 
 
@@ -313,7 +338,10 @@ var quizQuestions = [
 
     }
 
-   
+     //When the Clear High Scores Button Is Clicked
+
+     //When the Go Back Button Is Clicked
+
        
 
 
