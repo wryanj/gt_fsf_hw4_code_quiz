@@ -31,7 +31,7 @@ var submissionResultText = document.querySelector("#submissionResultText");
 var finalScore = document.querySelector("#finalScore");
 var initialsInput = document.querySelector("#initialsInput");
 var submitScoreButton = document.querySelector("#submitScoreButton");
-var highScoresList = document.querySelector("highScoresList");
+var highScoresList = document.querySelector("#highScoresList");
 
 //Define Array For Quiz Question Objects I Will Use In The Program
 var quizQuestions = [
@@ -81,8 +81,6 @@ var quizQuestions = [
         correctOption: "A For Loop" 
     }
 ]
-    //Log the Array Length Detected by Browser
-    console.log("Detected Number of Quiz Questions = " + quizQuestions.length);
    
 //Define Event Listners and Handlers to Trigger Important Functions
 
@@ -107,7 +105,7 @@ var quizQuestions = [
 
     //When Page Is initialized...log a message to the console its initialized. This is called via onload attribute in body elemenet of html
     function init() {
-        console.log("Page loaded and Init() function invoked")
+        console.log("Page loaded and init() function invoked")
     }
 
     //When Get High Scores Button is Clicked...
@@ -121,7 +119,7 @@ var quizQuestions = [
 
     //When Start Button Is Clicked, Start The Quiz (Display Questions Div HTML, Start Countdown)....
     function displayQuiz() {
-        console.log("Start Button Clicked and displayQuiz() function invoked");
+        console.log("displayQuiz() function invoked");
 
         //Shuffle the Questions Order? |REVISIT|
 
@@ -137,10 +135,7 @@ var quizQuestions = [
         console.log("countdown() function invoked")
         timerCount = 30;
         countdownClock.textContent = timerCount;
-        console.log ("Number of Quiz Questions = " + quizQuestions.length);
-        console.log ("Current running index of quiz question " + runningQuestionIndex);
         
-
         //Use set Interval Method to call function to execute every 1000 milleseconds (Every 1 Second)
         var timeInterval = setInterval(function () {
 
@@ -182,8 +177,7 @@ var quizQuestions = [
 
     //Once Quiz is Started, Render First Quiz Question and Answer Choices (Make Re-Usable Function When Submit Is Clicked)
     function renderQuizQuestion (){
-        console.log("renderQuizQuestion Function Has Been invoked");
-        console.log("running questions index " + runningQuestionIndex)
+        console.log("renderQuizQuestion() functoin invoked");
 
         //Make Sure submissionResultContainer is hidden
         submissionResultContainer.classList.add("d-none");
@@ -209,7 +203,7 @@ var quizQuestions = [
 
     //Check if answer is correct by
     function checkAnswer(){
-        console.log("checkAnswer() function has been invoked")
+        console.log("checkAnswer() function invoked")
 
         //Get the value of the answer
 
@@ -249,7 +243,6 @@ var quizQuestions = [
 
             //Up the score count..
                 scoreCount = scoreCount + 25;
-                console.log("Current scoreCount is  " + scoreCount);
 
             //Render the next question..
 
@@ -277,7 +270,6 @@ var quizQuestions = [
 
             //Decrease the score count..
                 scoreCount = scoreCount - 50;
-                console.log("Current scoreCount Is " + scoreCount);
 
             //Decrement the Timer 10 Seconds
                 timerCount = timerCount-10;
@@ -294,7 +286,7 @@ var quizQuestions = [
 
     //When game is finished (timer expires OR question sequence completes) present final score and input form for user initials
     function presentFinalQuizScore() {
-        console.log ("presentFinalQuizScore() function has been invoked");
+        console.log ("presentFinalQuizScore() function invoked");
 
         //Hide the quizContentContainer and the submissionResultContainerand Display the logQuizScoreContainer
         quizContentContainer.classList.add("d-none");
@@ -305,25 +297,43 @@ var quizQuestions = [
         finalScore.textContent = scoreCount;
     }
 
-    //Upon click of the submit score button.. capture their initials and score and store it locally
-    function logQuizScore(){
-        console.log("logQuizScore() function has been invoked")
+    //Upon click of the submit score button.. 
 
-        //Collect the users initials from the form as a local variable..
-        console.log(initialsInput.value);
-        var userInitials = initialsInput.value;
+        // Capture their initials and score and store it locally
+        function logQuizScore(){
+            console.log("logQuizScore() function invoked")
 
-//Investigate //Store the initials and score locally..
+            //Collect the users initials from the form as a local variable..
+            console.log(initialsInput.value);
+            var userInitials = initialsInput.value;
 
-        //Display the latest list of initials and high scores...
+//HOW TO STORE ON TOP OF EACHOTHER RUNNING LIST? //Store the initials and score locally and then reset the variable values for next round..
+
+            //Save user entered initials and user score (current scorecount) using "storedScore" as key
+            localStorage.setItem("storedScore", userInitials + " " + scoreCount);
+
+            //Once saved, reset the variable for user initials to an empty string and scorecount back to 0...
+            userInitials="";
+            scoreCount=0;
+
+            //Get The Latest list of stored high scores..
+            var storedScores = localStorage.getItem("storedScore");
+            console.log("Retrieved Scores Are " + storedScores);
 
             //Hide the logQuizScore container and display the endingScreenContainer
             logQuizScoreContainer.classList.add("d-none");
             endingScreenContainer.classList.remove("d-none");
 
-//Create Elemenet Then Pre-pend!            //Append the latest stuff to the screen
-            highScoresList.append(userInitials, finalScore);
+            //Display the storeScores within the field for scores as divs..
 
+                //Create a new div element as a variable
+                var newScoreE = document.createElement("div");
+
+                //Assign the innerHTML of the newScoreE we just made to be the retrieved initials and score..
+                newScoreE.innerHTML = storedScores;
+
+                //Pre-Pend it to the Div I have in my HTML for highScoresList
+                highScoresList.appendChild(newScoreE);
 
 
         //update the screen with new options for the user Go-Back and Clear High-Scores
