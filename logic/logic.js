@@ -327,25 +327,34 @@ var quizQuestions = [
             //Get The Latest list of stored high scores..
             var storedScores = localStorage.getItem("storedScore");
             console.log("Retrieved Scores Are " + storedScores);
+ 
+            //Create a new div element as a variable
+            var newScoreE = document.createElement("div");
+ 
+            //Assign the innerHTML of the newScoreE we just made to be the retrieved initials and score..
+            newScoreE.innerHTML = storedScores;
+                         
+            //Append it as a child to the Div I have in my HTML for holding high scores list
+            highScoresList.appendChild(newScoreE);
 
             //Hide the logQuizScore container and display the endingScreenContainer (If clicked From Start, Hide the Welcome Screen Container)
             logQuizScoreContainer.classList.add("d-none");
             welcomeScreenContainer.classList.add("d-none");
             endingScreenContainer.classList.remove("d-none");
 
-            //Create a new div element as a variable
-            var newScoreE = document.createElement("div");
-
-            //Assign the innerHTML of the newScoreE we just made to be the retrieved initials and score..
-            newScoreE.innerHTML = storedScores;
-            
-            //Append it as a child to the Div I have in my HTML for holding high scores list
-            highScoresList.appendChild(newScoreE);
+            //Disable Get High Scores Button So It Cannot pull the same stuff multiple times
+            getHighScoresButton.disabled = true;
         }
 
     // When The Go Back Button is Pressed...Re-load the page to take you to start screen (onload html body attribute triggers init function)
     function goBack() {
         console.log("goBack() function invoked")
+
+        //Hide the current screen and unhide the welcomeContainerScreen for smooth feeling transition
+        endingScreenContainer.classList.add("d-none");
+        welcomeScreenContainer.classList.remove("d-none");
+
+        //Then reload to reset the old questions and stuff
         location.reload();
     }
     
