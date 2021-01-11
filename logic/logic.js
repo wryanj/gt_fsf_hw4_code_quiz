@@ -208,7 +208,7 @@ var quizQuestions = [
 
         //Get the value of the answer
 
-            //If 'any' radio button is checked, run through each option to detect the selected answer...
+            //If 'any' radio button is checked..., run through each option to detect the selected answer...
             if (activeOption1Value.checked===true || activeOption2Value.checked===true || activeOption3Value.checked===true || activeOption4Value.checked===true) {
                 for (i = 0, length = radioQuestions.length; i < length; i++) {
                     //if the radio question is checked...
@@ -245,13 +245,15 @@ var quizQuestions = [
             //Up the score count..
                 scoreCount = scoreCount + 25;
 
-            //Render the next question..
+            //Render the next question (if questions remain to be answered)..
 
                 // Up the running question index by 1...
                 runningQuestionIndex++;
 
-                // Wait 1 Second and call the render quiz question function again 
-                return setTimeout(renderQuizQuestion, 1000);
+                if (runningQuestionIndex < quizQuestions.length){
+                    // Wait 1 Second and call the render quiz question function again 
+                     return setTimeout(renderQuizQuestion, 1000);
+                }
         }
 
         //If submitted option is not correct...
