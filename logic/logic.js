@@ -4,6 +4,7 @@ var timerCount;
 var runningQuestionIndex = 0;
 var selectedOption;
 var scoreCount = 0;
+var userInitials;
 
 //Define Variables For Key Containers to Hide or Unhide Through The Program
 var welcomeScreenContainer = document.querySelector("#welcomeScreenContainer");
@@ -297,24 +298,31 @@ var quizQuestions = [
         finalScore.textContent = scoreCount;
     }
 
-    //Upon click of the submit score button.. 
+    //Upon click of the submit Submit Score Button...
 
         // Capture their initials and score and store it locally
         function logQuizScore(){
             console.log("logQuizScore() function invoked")
 
-            //Collect the users initials from the form as a local variable..
-            console.log(initialsInput.value);
-            var userInitials = initialsInput.value;
+            //Save the Submitted Initials to the global variable userInitials
+            userInitials = initialsInput.value;
 
-//HOW TO STORE ON TOP OF EACHOTHER RUNNING LIST? //Store the initials and score locally and then reset the variable values for next round..
+            //Store the initials and score locally, and then reset the variable values for next round..
 
-            //Save user entered initials and user score (current scorecount) using "storedScore" as key
-            localStorage.setItem("storedScore", userInitials + " " + scoreCount);
+                //Save user entered initials and user score (current scorecount) using "storedScore" as key
+                localStorage.setItem("storedScore", userInitials + " : " + scoreCount);
 
-            //Once saved, reset the variable for user initials to an empty string and scorecount back to 0...
-            userInitials="";
-            scoreCount=0;
+                //Once saved, reset the variable for user initials to an empty string and scorecount back to 0...
+                userInitials="";
+                scoreCount=0;
+            
+            // Call the displayHighScores Global Function
+            displayHighScores();
+
+
+        //Display the storeScores within the field for scores as divs..
+        function displayHighScores(){
+            console.log("displayHighScores() function invoked");
 
             //Get The Latest list of stored high scores..
             var storedScores = localStorage.getItem("storedScore");
@@ -324,27 +332,20 @@ var quizQuestions = [
             logQuizScoreContainer.classList.add("d-none");
             endingScreenContainer.classList.remove("d-none");
 
-            //Display the storeScores within the field for scores as divs..
+            //Create a new div element as a variable
+            var newScoreE = document.createElement("div");
 
-                //Create a new div element as a variable
-                var newScoreE = document.createElement("div");
-
-                //Assign the innerHTML of the newScoreE we just made to be the retrieved initials and score..
-                newScoreE.innerHTML = storedScores;
-
-                //Pre-Pend it to the Div I have in my HTML for highScoresList
-                highScoresList.appendChild(newScoreE);
+            //Assign the innerHTML of the newScoreE we just made to be the retrieved initials and score..
+            newScoreE.innerHTML = storedScores;
+            
+            //Append it as a child to the Div I have in my HTML for holding high scores list
+            highScoresList.appendChild(newScoreE);
+        }
 
 
-        //update the screen with new options for the user Go-Back and Clear High-Scores
 
-            //If Go back is Selected, Return to Start of Quiz
+        
 
-            //If Clear High Scores is Selected...
-
-                //Clear local storage
-
-                //Return to Start of Quiz
 
     }
 
