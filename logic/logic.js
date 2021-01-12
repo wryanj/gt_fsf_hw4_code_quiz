@@ -158,7 +158,8 @@ var quizQuestions = [
                     countdownClock.textContent = "";
                     // alert the user they finished..
                     alert ("Congratulations! You finished before time expired! Click ok to log your score.");
-                    // and call the function to show the final score and gather intiials
+                    // and call the function to calculate the final score and show the final score and gather intiials
+                    calculateFinalScore();
                     presentFinalQuizScore();
                 }
                 //If all the questions are not answered, but time has expired (meaning zero is not less than timercount anymore whic makes the original if statement false)
@@ -169,7 +170,8 @@ var quizQuestions = [
                     countdownClock.textContent = "";
                     // alert the user that the time has expired..
                     alert ("Time's Up! Click ok to log your score.");
-                    // and call the function to show the final score and gather intiials
+                    // and call the function to calculate final score and show the final score and gather intiials
+                    calculateFinalScore();
                     presentFinalQuizScore();
                 }
             }
@@ -288,7 +290,18 @@ var quizQuestions = [
         }  
     }
 
-    //When game is finished (timer expires OR question sequence completes) present final score and input form for user initials
+    //When game is finished (timer expires OR question sequence completes) calculate score and present final score and input form for user initials
+
+    function calculateFinalScore(){
+        console.log("calculateFinalScore() functoin invoked");
+
+        //Create the Final Score For The User, Which is the Score Count + The remaining seconds for high score variation
+        finalScoreCount = scoreCount+timerCount;
+        console.log("Raw Score = " + scoreCount);
+        console.log("Bonus points for time remaining = " + timerCount);
+        console.log("Final Score = " + finalScoreCount);
+    }
+
     function presentFinalQuizScore() {
         console.log ("presentFinalQuizScore() function invoked");
 
@@ -296,12 +309,6 @@ var quizQuestions = [
         quizContentContainer.classList.add("d-none");
         submissionResultContainer.classList.add("d-none");
         logQuizScoreContainer.classList.remove("d-none");
-
-        //Create the Final Score For The User, Which is the Score Count + The remaining seconds for high score variation
-        finalScoreCount = scoreCount+timerCount;
-        console.log("Raw Score = " + scoreCount);
-        console.log("Bonus points for time remaining = " + timerCount);
-        console.log("Final Score = " + finalScoreCount);
 
         //Present the users score to them
         finalScore.textContent = finalScoreCount;
@@ -313,20 +320,30 @@ var quizQuestions = [
         function logQuizScore(){
             console.log("logQuizScore() function invoked");
 
-            //Save the Submitted Initials to the global variable userInitials
+           //Log  initials to a variable and validate its not blank
             userInitials = initialsInput.value;
+            console.log("userInitials value is equal to " + userInitials);
 
-            //Store the initials and score locally, and then reset the variable values for next round..
+            //If userInitials is not populated, alert the user and repeat the loop (per the while conditoin)
+            if (userInitials === "") {
+                alert ("Please enter your initals");
+                presentFinalQuizScore();
+            }
 
-                //Save user entered initials and user score (current scorecount) using "storedScore" as key
-                localStorage.setItem("storedScore", userInitials + " : " + finalScoreCount);
+            //If user initials are not blank (else), log the score and call display High Score Function
+            else {
+                //Store the initials and score locally, and then reset the variable values for next round..
 
-                //Once saved, reset the variable for user initials to an empty string and scorecount back to 0...
-                userInitials="";
-                scoreCount=0;
+                     //Save user entered initials and user score (current scorecount) using "storedScore" as key
+                     localStorage.setItem("storedScore", userInitials + " : " + finalScoreCount);
+
+                     //Once saved, reset the variable for user initials to an empty string and scorecount back to 0...
+                    userInitials="";
+                     scoreCount=0;
             
-            // Call the displayHighScores Global Function
-            displayHighScores();
+                 // Call the displayHighScores Global Function
+                displayHighScores();
+            }
         }
 
         //Upon completion of the logQuizScore functoin (after submit score button pressed) OR upon press of the Get High Scores Button...
