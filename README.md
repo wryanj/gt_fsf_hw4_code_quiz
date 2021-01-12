@@ -9,7 +9,7 @@ This is the fourth homework for the gt fsf class with objective being to create 
 4.  [Credits](#Credits)
 
 ## Deployed Application
-[Enter]
+[https://wryanj.github.io/gt_fsf_hw4_code_quiz/]
 
 ## Motivation
 I did this to progress my knowledge on javascript, and the various ways to write logic, loops, variables, arrays and manipulate other elements of an HTML file.
