@@ -321,7 +321,8 @@ var quizQuestions = [
             console.log("logQuizScore() function invoked");
 
            //Log  initials to a variable and validate its not blank
-            userInitials = initialsInput.value;
+            var rawUserInitials = initialsInput.value;
+            userInitials = rawUserInitials.toUpperCase();
             console.log("userInitials value is equal to " + userInitials);
 
             //If userInitials is not populated, alert the user and repeat the loop (per the while conditoin)
