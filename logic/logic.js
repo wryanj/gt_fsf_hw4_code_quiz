@@ -164,7 +164,7 @@ var quizQuestions = [
                     presentFinalQuizScore();
                 }
                 //If they loose ten seconds for an icorrect answer, but they dont have 10 left to spare..
-                else if (timerCount <= 0) {
+                else if (timerCount < 0) {
                     timerCount=0;
                     countdownClock.textContent = timerCount;
                     clearInterval(timeInterval);
