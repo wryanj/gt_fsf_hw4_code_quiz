@@ -6,6 +6,7 @@ var selectedOption;
 var scoreCount = 0;
 var finalScoreCount;
 var userInitials;
+var highScoresArray; //Exploring how to use this
 
 //Define Variables For Key Containers to Hide or Unhide Through The Program
 var welcomeScreenContainer = document.querySelector("#welcomeScreenContainer");
@@ -108,7 +109,6 @@ var quizQuestions = [
 
     //Clear High Scores Button
     clearHighScoresButton.addEventListener("click", clearHighScores);
-
 
 
 //Define Program Logic & Key Functions
@@ -302,7 +302,7 @@ var quizQuestions = [
         console.log("Raw Score = " + scoreCount);
         console.log("Bonus points for time remaining = " + timerCount);
         console.log("Final Score = " + finalScoreCount);
-        
+
         //Present the users score to them
         finalScore.textContent = finalScoreCount;
     }
@@ -311,7 +311,7 @@ var quizQuestions = [
 
         // Capture their initials and score and store it locally
         function logQuizScore(){
-            console.log("logQuizScore() function invoked")
+            console.log("logQuizScore() function invoked");
 
             //Save the Submitted Initials to the global variable userInitials
             userInitials = initialsInput.value;
