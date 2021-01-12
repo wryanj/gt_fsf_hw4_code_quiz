@@ -143,10 +143,11 @@ var quizQuestions = [
 
             //If there is time left on the clock, and not all questions have been answered yet...
             if (timerCount > 0 && runningQuestionIndex < quizQuestions.length) {
-                //Show remaining seconds on countdown clock...
-                countdownClock.textContent = timerCount;
                 //Decrement the Timer Count by 1...
                 timerCount--;
+                //Show remaining seconds on countdown clock...
+                countdownClock.textContent = timerCount;
+                
             }
             //If there is NOT time left on the clock, or all the quiz questions have been answered, do one of two things depending on the condition that is false...
             else {
@@ -159,6 +160,15 @@ var quizQuestions = [
                     // alert the user they finished..
                     alert ("Congratulations! You finished before time expired! Click ok to log your score.");
                     // and call the function to calculate the final score and show the final score and gather intiials
+                    calculateFinalScore();
+                    presentFinalQuizScore();
+                }
+                //If they loose ten seconds for an icorrect answer, but they dont have 10 left to spare..
+                else if (timerCount <= 0) {
+                    timerCount=0;
+                    countdownClock.textContent = timerCount;
+                    clearInterval(timeInterval);
+                    alert("You dont have 10 seconds left to lose! Game Over");
                     calculateFinalScore();
                     presentFinalQuizScore();
                 }
