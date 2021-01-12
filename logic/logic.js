@@ -253,7 +253,7 @@ var quizQuestions = [
                 submissionResultText.classList.add("correct");
                 
                 //Make the text content say "correct!"
-                submissionResultText.textContent = "Correct!";
+                submissionResultText.textContent = "Correct! (+25pts)";
 
             //Up the score count..
                 scoreCount = scoreCount + 25;
@@ -282,7 +282,7 @@ var quizQuestions = [
                 submissionResultText.classList.add("incorrect");
                 
                 //Make the text content say "Incorrect"
-                submissionResultText.textContent = "Incorrect";
+                submissionResultText.textContent = "Incorrect (-50pts, -10s)";
 
             //Decrease the score count..
                 scoreCount = scoreCount - 50;
