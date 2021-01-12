@@ -325,13 +325,19 @@ var quizQuestions = [
             userInitials = rawUserInitials.toUpperCase();
             console.log("userInitials value is equal to " + userInitials);
 
-            //If userInitials is not populated, alert the user and repeat the loop (per the while conditoin)
+            //If userInitials is not populated, alert the user let them try again
             if (userInitials === "") {
                 alert ("Please enter your initals");
                 presentFinalQuizScore();
             }
+            //If userInitials is not equal to 3 characters, alert the user and let them try again
 
-            //If user initials are not blank (else), log the score and call display High Score Function
+            else if (userInitials.length != 3) {
+                alert("Please ensure you enter three letters for you initials");
+                presentFinalQuizScore();
+            }
+
+            //If user initials are not blank and are equal to three characters (else), log the score and call display High Score Function
             else {
                 //Store the initials and score locally, and then reset the variable values for next round..
 
