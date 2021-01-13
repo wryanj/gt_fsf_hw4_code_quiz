@@ -6,6 +6,7 @@ var selectedOption;
 var scoreCount = 0;
 var finalScoreCount;
 var userInitials;
+var scoreInstanceObject; // Playing with how to use this
 
 //Define Variables For Key Containers to Hide or Unhide Through The Program
 var welcomeScreenContainer = document.querySelector("#welcomeScreenContainer");
@@ -352,19 +353,41 @@ var quizQuestions = [
 
                 //If user initials are not blank and are equal to three characters (else), log the score and call display High Score Function
                 else {
-                    //Store the initials and score locally, and then reset the variable values for next round..
-                    
-                        //Generate a unique number to add to the key so they are unique and not overwritten (I do this since scores are all I am storing, so will loop key index to display later)
-                        var storedScoreRandomIndex = Math.random()*100000;
-                        console.log("random key number generated: " + storedScoreRandomIndex);
-                    
-                        //Save user entered initials and user score (current scorecount) using "storedScore" as key
-                        localStorage.setItem("storedScore" + storedScoreRandomIndex, userInitials + " : " + finalScoreCount);
 
-                        //Once saved, reset the variable for user initials to an empty string and scorecount back to 0...
-                        userInitials="";
-                        scoreCount=0;
-                
+                    //Create and Object with The Initials and Value
+                    scoreInstanceObject = {
+                        initials: userInitials,
+                        score: finalScoreCount
+                    };
+                    console.log("scoreInstanceObject Created = " + scoreInstanceObject);
+
+                    //Create a High Score Object Array
+                    var highScoresObjectArray = [];
+                    console.log("HighScoresObjectArray = " + highScoresObjectArray);
+
+                    //If the key exists in local storage (if the get item by key does not return null)...
+                    console.log("Retrieved Value For Local Storage On Check If It Exists = " + localStorage.getItem("storedHighScoresObjectArray"));
+                    if (localStorage.getItem("storedHighScoresObjectArray")!== null) {
+                        console.log("Detected that there are objects stored to the key (detected its not null)")
+
+                        //get the latest array of objects from the local store
+                        var retrievedHighScoresObjectArray =JSON.parse(localStorage.getItem("storedHighScoresObjectArray"));
+
+                        //set the retrieved arrays equal the the current high scores Object array...
+                        highScoresObjectArray = retrievedHighScoresObjectArray;
+                    }
+
+                    //Push the new object I created into the high scores Object Array
+                    highScoresObjectArray.push(scoreInstanceObject);
+                    console.log("highScores object Array After push of score instance object = " + highScoresObjectArray)
+
+                    //Store the highScoresObjectArray locally
+                    localStorage.setItem("storedHighScoresObjectArray", JSON.stringify(highScoresObjectArray));
+
+                    //Once saved, reset the variable for user initials to an empty string and scorecount back to 0...
+                    userInitials="";
+                    scoreCount=0;
+
                     // Call the displayHighScores Global Function
                     displayHighScores();
                 }
@@ -374,33 +397,6 @@ var quizQuestions = [
         function displayHighScores(){
             console.log("displayHighScores() function invoked");
 
-            //Retrieve all scores saved locally and display them on the screen
-            for (i=0; i<localStorage.length; i++) {
-
-                //Get the value by the first key in the index..
-                var storedScoreRetrievedKey = localStorage.key(i);
-                var storedScoreInstance = localStorage.getItem(storedScoreRetrievedKey);
-
-                console.log("Retrieved Score for iteration " + i + "is " + storedScoreInstance);
-                    
-                //Create a new div element as a variable named newScoreDiv
-                var newScoreDiv = document.createElement("div");
-
-                //Create a data-value attribute for the new div and set its value to the scored score instance
-                newScoreDiv.setAttribute("data-value", storedScoreInstance);
-
-                //Assign the innerHTML of the newScoreE we just made to be the retrieved initials and score..
-                newScoreDiv.innerHTML = storedScoreInstance;
-                                            
-                //Append it as a child to the Div I have in my HTML for holding high scores list
-                highScoresList.appendChild(newScoreDiv);
-
-            }
-
-            //Sort the displayed values (displayed as div elements) to show them highest to lowest
-
-
-
             //Hide the logQuizScore container and display the endingScreenContainer (If clicked From Start, Hide the Welcome Screen Container)
             logQuizScoreContainer.classList.add("d-none");
             welcomeScreenContainer.classList.add("d-none");
@@ -408,6 +404,27 @@ var quizQuestions = [
 
             //Disable Get High Scores Button So It Cannot pull the same stuff multiple times
             getHighScoresButton.disabled = true;
+
+            //Get the object saved from local storage
+            var forDisplayHighScoreObjectArray = JSON.parse(localStorage.getItem("storedHighScoresObjectArray"));
+            console.log("forDisplayHighScoreObjectArray = " + forDisplayHighScoreObjectArray);
+
+            //for each object in the array, loop through and create a new div and append it to the screen
+            for (i = 0; i<forDisplayHighScoreObjectArray.length; i++) {
+
+                //Get the first object in the index...
+                var forDisplayHighScoreObject = forDisplayHighScoreObjectArray[i];
+
+                //Create a new div elemenet as a variable named newScoreDiv
+                var newScoreDiv = document.createElement("div");
+
+                //Assign the innerHTML of that div to the the properties of the object
+                newScoreDiv.innerHTML = forDisplayHighScoreObject.initials + " : " + forDisplayHighScoreObject.score;
+
+                //Append it as a child to the Div I have in my HTML for holding high scores list
+                highScoresList.appendChild(newScoreDiv);
+            }
+
         }
 
     // When The Go Back Button is Pressed...Re-load the page to take you to start screen (onload html body attribute triggers init function)
