@@ -163,27 +163,31 @@ var quizQuestions = [
                     calculateFinalScore();
                     presentFinalQuizScore();
                 }
-                //If they loose ten seconds for an icorrect answer, but they dont have 10 left to spare..
-                else if (timerCount < 0) {
-                    timerCount=0;
-                    countdownClock.textContent = timerCount;
-                    clearInterval(timeInterval);
-                    alert("You dont have 10 seconds left to lose! Game Over");
-                    calculateFinalScore();
-                    presentFinalQuizScore();
-                }
-                //If all the questions are not answered, but time has expired (meaning zero is not less than timercount anymore whic makes the original if statement false)
-                else{
-                    //clear the interval with the clearInterval method
-                    clearInterval(timeInterval);
-                    // Set an empty string to the value of the countdown field
-                    countdownClock.textContent = "";
-                    // alert the user that the time has expired..
-                    alert ("Time's Up! Click ok to log your score.");
-                    // and call the function to calculate final score and show the final score and gather intiials
-                    calculateFinalScore();
-                    presentFinalQuizScore();
-                }
+                    //If they loose ten seconds for an icorrect answer, but they dont have 10 left to spare..
+                    else if (timerCount < 0) {
+                        //Set timer count to 0..
+                        timerCount=0;
+                        countdownClock.textContent = timerCount;
+                        //Clear the Interval
+                        clearInterval(timeInterval);
+                        //Display why their time is up all the sudden..
+                        alert("You dont have 10 seconds left to lose! Game Over");
+                        //Call the next two functions
+                        calculateFinalScore();
+                        presentFinalQuizScore();
+                    }
+                    //If all the questions are not answered, but time has expired (meaning zero is not less than timercount anymore whic makes the original if statement false)
+                    else{
+                        //clear the interval with the clearInterval method
+                        clearInterval(timeInterval);
+                        // Set an empty string to the value of the countdown field
+                        countdownClock.textContent = "";
+                        // alert the user that the time has expired..
+                        alert ("Time's Up! Click ok to log your score.");
+                        // and call the function to calculate final score and show the final score and gather intiials
+                        calculateFinalScore();
+                        presentFinalQuizScore();
+                    }
             }
         }, 1000)
     }
@@ -234,11 +238,11 @@ var quizQuestions = [
                 }   
             } 
 
-            //If 'no' radio buttons are selected, alert the user to make a selection and have them
-            else {
-                alert("Please select an option");
-                return;
-            }
+                //If 'no' radio buttons are selected, alert the user to make a selection and have them
+                else {
+                    alert("Please select an option");
+                    return;
+                }
 
         //If submitted option is correct...  
         if (selectedOption === quizQuestions[runningQuestionIndex].correctOption) {
@@ -259,45 +263,45 @@ var quizQuestions = [
                 scoreCount = scoreCount + 25;
 
             //Render the next question (if questions remain to be answered)..
-
                 // Up the running question index by 1...
                 runningQuestionIndex++;
 
+                // If there are no questoins left to answer...
                 if (runningQuestionIndex < quizQuestions.length){
                     // Wait 1 Second and call the render quiz question function again 
                      return setTimeout(renderQuizQuestion, 1000);
                 }
         }
 
-        //If submitted option is not correct...
-        else {
+            //If submitted option is not correct...
+            else {
 
-            //Display red text "Incorrect"
+                //Display red text "Incorrect"
 
-                //Show the submissionResultContainer
-                submissionResultContainer.classList.remove("d-none");
+                    //Show the submissionResultContainer
+                    submissionResultContainer.classList.remove("d-none");
 
-                //Assign my .incorrect class to the p elemenet in that container (and remove my .correct class if its present)
-                submissionResultText.classList.remove("correct");
-                submissionResultText.classList.add("incorrect");
-                
-                //Make the text content say "Incorrect"
-                submissionResultText.textContent = "Incorrect (-50pts, -10s)";
+                    //Assign my .incorrect class to the p elemenet in that container (and remove my .correct class if its present)
+                    submissionResultText.classList.remove("correct");
+                    submissionResultText.classList.add("incorrect");
+                    
+                    //Make the text content say "Incorrect"
+                    submissionResultText.textContent = "Incorrect (-50pts, -10s)";
 
-            //Decrease the score count..
-                scoreCount = scoreCount - 50;
+                //Decrease the score count..
+                    scoreCount = scoreCount - 50;
 
-            //Decrement the Timer 10 Seconds
-                timerCount = timerCount-10;
+                //Decrement the Timer 10 Seconds
+                    timerCount = timerCount-10;
 
-            //Render the next question..
+                //Render the next question..
 
-                // Up the running question index by 1...
-                runningQuestionIndex++;
+                    // Up the running question index by 1...
+                    runningQuestionIndex++;
 
-                // Wait 1 Second and call the render quiz question function again 
-                setTimeout(renderQuizQuestion, 1000);
-        }  
+                    // Wait 1 Second and call the render quiz question function again 
+                    setTimeout(renderQuizQuestion, 1000);
+            }  
     }
 
     //When game is finished (timer expires OR question sequence completes) calculate score and present final score and input form for user initials
@@ -340,27 +344,26 @@ var quizQuestions = [
                 alert ("Please enter your initals");
                 presentFinalQuizScore();
             }
-            //If userInitials is not equal to 3 characters, alert the user and let them try again
 
-            else if (userInitials.length != 3) {
-                alert("Please ensure you enter three letters for you initials");
-                presentFinalQuizScore();
-            }
+                //If userInitials is not equal to 3 characters, alert the user and let them try again
+                else if (userInitials.length != 3) {
+                    alert("Please ensure you enter three letters for you initials");
+                    presentFinalQuizScore();
+                }
 
-            //If user initials are not blank and are equal to three characters (else), log the score and call display High Score Function
-            else {
-                //Store the initials and score locally, and then reset the variable values for next round..
+                //If user initials are not blank and are equal to three characters (else), log the score and call display High Score Function
+                else {
+                    //Store the initials and score locally, and then reset the variable values for next round..
+                        //Save user entered initials and user score (current scorecount) using "storedScore" as key
+                        localStorage.setItem("storedScore", userInitials + " : " + finalScoreCount);
 
-                     //Save user entered initials and user score (current scorecount) using "storedScore" as key
-                     localStorage.setItem("storedScore", userInitials + " : " + finalScoreCount);
-
-                     //Once saved, reset the variable for user initials to an empty string and scorecount back to 0...
-                    userInitials="";
-                     scoreCount=0;
-            
-                 // Call the displayHighScores Global Function
-                displayHighScores();
-            }
+                        //Once saved, reset the variable for user initials to an empty string and scorecount back to 0...
+                        userInitials="";
+                        scoreCount=0;
+                
+                    // Call the displayHighScores Global Function
+                    displayHighScores();
+                }
         }
 
         //Upon completion of the logQuizScore functoin (after submit score button pressed) OR upon press of the Get High Scores Button...
