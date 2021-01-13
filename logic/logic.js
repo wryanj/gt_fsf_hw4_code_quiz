@@ -6,7 +6,7 @@ var selectedOption;
 var scoreCount = 0;
 var finalScoreCount;
 var userInitials;
-var highScoresArray; //Exploring how to use this
+var storedScoreRandomIndex; //Exploring how to use this
 
 //Define Variables For Key Containers to Hide or Unhide Through The Program
 var welcomeScreenContainer = document.querySelector("#welcomeScreenContainer");
@@ -354,8 +354,12 @@ var quizQuestions = [
                 //If user initials are not blank and are equal to three characters (else), log the score and call display High Score Function
                 else {
                     //Store the initials and score locally, and then reset the variable values for next round..
+                        //Generate a unique number to add to the key so they are unique and not overwritten (I do this since scores are all I am storing, so will loop key index to display later)
+                        var storedScoreRandomIndex = Math.random()*100000;
+                        console.log("random key number generated: " + storedScoreRandomIndex);
+                    
                         //Save user entered initials and user score (current scorecount) using "storedScore" as key
-                        localStorage.setItem("storedScore", userInitials + " : " + finalScoreCount);
+                        localStorage.setItem("storedScore" + storedScoreRandomIndex, userInitials + " : " + finalScoreCount);
 
                         //Once saved, reset the variable for user initials to an empty string and scorecount back to 0...
                         userInitials="";
@@ -370,18 +374,26 @@ var quizQuestions = [
         function displayHighScores(){
             console.log("displayHighScores() function invoked");
 
-            //Get The Latest list of stored high scores..
-            var storedScores = localStorage.getItem("storedScore");
-            console.log("Retrieved Scores Are " + storedScores);
- 
-            //Create a new div element as a variable
-            var newScoreE = document.createElement("div");
- 
-            //Assign the innerHTML of the newScoreE we just made to be the retrieved initials and score..
-            newScoreE.innerHTML = storedScores;
-                         
-            //Append it as a child to the Div I have in my HTML for holding high scores list
-            highScoresList.appendChild(newScoreE);
+            //Retrieve all scores saved locally and display them on the screen
+            for (i=0; i<localStorage.length; i++) {
+
+                //Get the value by the first key in the index..
+                var storedScores1 = localStorage.key(i);
+                var storedScores2 = localStorage.getItem(storedScores1);
+
+                console.log("Retrieved Score for iteration " + i + "is " + storedScores2);
+                    
+                //Create a new div element as a variable
+                var newScoreE = document.createElement("div");
+                    
+                //Assign the innerHTML of the newScoreE we just made to be the retrieved initials and score..
+                newScoreE.innerHTML = storedScores2;
+                                            
+                //Append it as a child to the Div I have in my HTML for holding high scores list
+                highScoresList.appendChild(newScoreE);
+            }
+
+
 
             //Hide the logQuizScore container and display the endingScreenContainer (If clicked From Start, Hide the Welcome Screen Container)
             logQuizScoreContainer.classList.add("d-none");
