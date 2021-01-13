@@ -353,6 +353,7 @@ var quizQuestions = [
                 //If user initials are not blank and are equal to three characters (else), log the score and call display High Score Function
                 else {
                     //Store the initials and score locally, and then reset the variable values for next round..
+                    
                         //Generate a unique number to add to the key so they are unique and not overwritten (I do this since scores are all I am storing, so will loop key index to display later)
                         var storedScoreRandomIndex = Math.random()*100000;
                         console.log("random key number generated: " + storedScoreRandomIndex);
