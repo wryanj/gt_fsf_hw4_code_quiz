@@ -405,9 +405,21 @@ var quizQuestions = [
             //Disable Get High Scores Button So It Cannot pull the same stuff multiple times
             getHighScoresButton.disabled = true;
 
-            //Get the object saved from local storage
+            //Get the object(s) saved from local storage as an array
             var forDisplayHighScoreObjectArray = JSON.parse(localStorage.getItem("storedHighScoresObjectArray"));
-            console.log("forDisplayHighScoreObjectArray = " + forDisplayHighScoreObjectArray);
+            console.log("forDisplayHighScoreObjectArray values prior to sort");
+            console.log(forDisplayHighScoreObjectArray[0].score);
+            console.log(forDisplayHighScoreObjectArray[1].score);
+            console.log(forDisplayHighScoreObjectArray[2].score);
+
+            //Sort the array from highest to lowes score
+            forDisplayHighScoreObjectArray.sort(function (a,b) {
+                return b.score-a.score
+            })
+            console.log("forDisplayHighScoreObjectArray values after sort");
+            console.log(forDisplayHighScoreObjectArray[0].score);
+            console.log(forDisplayHighScoreObjectArray[1].score);
+            console.log(forDisplayHighScoreObjectArray[2].score);
 
             //for each object in the array, loop through and create a new div and append it to the screen
             for (i = 0; i<forDisplayHighScoreObjectArray.length; i++) {
