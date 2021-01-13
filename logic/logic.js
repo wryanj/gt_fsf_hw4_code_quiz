@@ -407,26 +407,29 @@ var quizQuestions = [
 
             //Get the object(s) saved from local storage as an array
             var forDisplayHighScoreObjectArray = JSON.parse(localStorage.getItem("storedHighScoresObjectArray"));
+            
 
-            //Sort the array from highest to lowes score
-            forDisplayHighScoreObjectArray.sort(function (a,b) {
-                return b.score-a.score
-            })
+            //If there are values from a storage, or a game just played.. (if there are values in the array to sort)
+            if (forDisplayHighScoreObjectArray !== null) {
+                forDisplayHighScoreObjectArray.sort(function (a,b) {
+                    return b.score-a.score
+                })
 
-            //for each object in the array, loop through and create a new div and append it to the screen
-            for (i = 0; i<forDisplayHighScoreObjectArray.length; i++) {
+                //for each object in the array, loop through and create a new div and append it to the screen
+                for (i = 0; i<forDisplayHighScoreObjectArray.length; i++) {
 
-                //Get the first object in the index...
-                var forDisplayHighScoreObject = forDisplayHighScoreObjectArray[i];
-
-                //Create a new div elemenet as a variable named newScoreDiv
-                var newScoreDiv = document.createElement("div");
-
-                //Assign the innerHTML of that div to the the properties of the object
-                newScoreDiv.innerHTML = forDisplayHighScoreObject.initials + " : " + forDisplayHighScoreObject.score;
-
-                //Append it as a child to the Div I have in my HTML for holding high scores list
-                highScoresList.appendChild(newScoreDiv);
+                    //Get the first object in the index...
+                    var forDisplayHighScoreObject = forDisplayHighScoreObjectArray[i];
+    
+                    //Create a new div elemenet as a variable named newScoreDiv
+                    var newScoreDiv = document.createElement("div");
+    
+                    //Assign the innerHTML of that div to the the properties of the object
+                    newScoreDiv.innerHTML = forDisplayHighScoreObject.initials + " : " + forDisplayHighScoreObject.score;
+    
+                    //Append it as a child to the Div I have in my HTML for holding high scores list
+                    highScoresList.appendChild(newScoreDiv);
+                }
             }
 
         }
