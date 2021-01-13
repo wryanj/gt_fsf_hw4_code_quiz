@@ -6,7 +6,6 @@ var selectedOption;
 var scoreCount = 0;
 var finalScoreCount;
 var userInitials;
-var storedScoreRandomIndex; //Exploring how to use this
 
 //Define Variables For Key Containers to Hide or Unhide Through The Program
 var welcomeScreenContainer = document.querySelector("#welcomeScreenContainer");
@@ -378,20 +377,26 @@ var quizQuestions = [
             for (i=0; i<localStorage.length; i++) {
 
                 //Get the value by the first key in the index..
-                var storedScores1 = localStorage.key(i);
-                var storedScores2 = localStorage.getItem(storedScores1);
+                var storedScoreRetrievedKey = localStorage.key(i);
+                var storedScoreInstance = localStorage.getItem(storedScoreRetrievedKey);
 
-                console.log("Retrieved Score for iteration " + i + "is " + storedScores2);
+                console.log("Retrieved Score for iteration " + i + "is " + storedScoreInstance);
                     
-                //Create a new div element as a variable
-                var newScoreE = document.createElement("div");
-                    
+                //Create a new div element as a variable named newScoreDiv
+                var newScoreDiv = document.createElement("div");
+
+                //Create a data-value attribute for the new div and set its value to the scored score instance
+                newScoreDiv.setAttribute("data-value", storedScoreInstance);
+
                 //Assign the innerHTML of the newScoreE we just made to be the retrieved initials and score..
-                newScoreE.innerHTML = storedScores2;
+                newScoreDiv.innerHTML = storedScoreInstance;
                                             
                 //Append it as a child to the Div I have in my HTML for holding high scores list
-                highScoresList.appendChild(newScoreE);
+                highScoresList.appendChild(newScoreDiv);
+
             }
+
+            //Sort the displayed values (displayed as div elements) to show them highest to lowest
 
 
 
