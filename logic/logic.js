@@ -411,11 +411,13 @@ var quizQuestions = [
 
             //If there are values from a storage, or a game just played.. (if there are values in the array to sort)
             if (forDisplayHighScoreObjectArray !== null) {
+
+                //Sort from high to low
                 forDisplayHighScoreObjectArray.sort(function (a,b) {
                     return b.score-a.score
                 })
 
-                //for each object in the array, loop through and create a new div and append it to the screen
+                //Then for each object in the array, loop through and create a new div and append it to the screen
                 for (i = 0; i<forDisplayHighScoreObjectArray.length; i++) {
 
                     //Get the first object in the index...
