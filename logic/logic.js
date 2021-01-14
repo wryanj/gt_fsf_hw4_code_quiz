@@ -6,7 +6,7 @@ var selectedOption;
 var scoreCount = 0;
 var finalScoreCount;
 var userInitials;
-var scoreInstanceObject; // Playing with how to use this
+var scoreInstanceObject; 
 
 //Define Variables For Key Containers to Hide or Unhide Through The Program
 var welcomeScreenContainer = document.querySelector("#welcomeScreenContainer");
@@ -16,77 +16,82 @@ var logQuizScoreContainer = document.querySelector("#logQuizScoreContainer");
 var endingScreenContainer = document.querySelector("#endingScreenContainer");
 
 //Define Variables For Key Elemenets I Want to Reference Or Manipulate Through The Program
-var getHighScoresButton = document.querySelector("#getHighScore");
-var startQuizButton = document.querySelector("#startQuizButton");
-var submitAnswerButton = document.querySelector("#submitAnswerButton");
-var countdownClock = document.querySelector("#countdownClock");
-var activeQuizQuestion = document.querySelector("#activeQuizQuestion");
-var activeOption1 = document.querySelector("#activeOption1");
-var activeOption1Value = document.querySelector("#radio1");
-var activeOption2 = document.querySelector("#activeOption2");
-var activeOption2Value = document.querySelector("#radio2");
-var activeOption3 = document.querySelector("#activeOption3");
-var activeOption3Value = document.querySelector("#radio3");
-var activeOption4 = document.querySelector("#activeOption4");
-var activeOption4Value = document.querySelector("#radio4");
-var radioQuestions = document.querySelectorAll(".form-check-input");
-var submissionResultText = document.querySelector("#submissionResultText");
-var finalScore = document.querySelector("#finalScore");
-var initialsInput = document.querySelector("#initialsInput");
-var submitScoreButton = document.querySelector("#submitScoreButton");
-var highScoresList = document.querySelector("#highScoresList");
-var goBackButton = document.querySelector("#goBackButton");
-var clearHighScoresButton = document.querySelector("#clearHighScoresButton");
 
+    //Buttons
+    var getHighScoresButton = document.querySelector("#getHighScore");
+    var startQuizButton = document.querySelector("#startQuizButton");
+    var submitAnswerButton = document.querySelector("#submitAnswerButton");
+    var goBackButton = document.querySelector("#goBackButton");
+    var clearHighScoresButton = document.querySelector("#clearHighScoresButton");
+    var submitScoreButton = document.querySelector("#submitScoreButton");
 
-//Define Array For Quiz Question Objects I Will Use In The Program
-var quizQuestions = [
-    {
-        questionName: "Question 0",
-        questionText: "What do you call a variable that can only have a true or false value?",
-        optionA: "An Array",
-        optionB: "A Boolean",
-        optionC: "A Bi-Conditional Variable",
-        optionD: "A Conditonal Variable",
-        correctOption: "A Boolean"
-    },
-    {
-        questionName: "Question 1",
-        questionText: "What is Bootstrap?",
-        optionA: "A library of javascript",
-        optionB: "A type of CSS Selector",
-        optionC: "A window method used to replace certain CSS classes",
-        optionD: "A library of CSS code accessible via use of pre-defined classes" ,
-        correctOption: "A library of CSS code accessible via use of pre-defined classes" 
-    },
-    {
-        questionName: "Question 2",
-        questionText: "What is Jquery?",
-        optionA: "A library of javascript",
-        optionB: "A type of CSS Selector",
-        optionC: "A window method to replace certain CSS classes",
-        optionD: "A window method used to request data from a database" ,
-        correctOption: "A library of javascript" 
-    },
-    {
-        questionName: "Question 3",
-        questionText: "What is an Array",
-        optionA: "A library of javascript",
-        optionB: "A type of html element attribute",
-        optionC: "A variable that contains multiple values stored to it",
-        optionD: "Just another name for a javascript object ", 
-        correctOption: "A variable that contains multiple values stored to it"
-    },
-    {
-        questionName: "Question 4",
-        questionText: "What type of loop allows you to run code until a certain increment is equal to or exceeding a defined limit?",
-        optionA: "A Do While Loop",
-        optionB: "A While Loop",
-        optionC: "A For Loop",
-        optionD: "An Until Loop",
-        correctOption: "A For Loop" 
-    }
-]
+    //Quiz Questions, Options and Timer
+    var countdownClock = document.querySelector("#countdownClock");
+    var activeQuizQuestion = document.querySelector("#activeQuizQuestion");
+    var activeOption1 = document.querySelector("#activeOption1");
+    var activeOption1Value = document.querySelector("#radio1");
+    var activeOption2 = document.querySelector("#activeOption2");
+    var activeOption2Value = document.querySelector("#radio2");
+    var activeOption3 = document.querySelector("#activeOption3");
+    var activeOption3Value = document.querySelector("#radio3");
+    var activeOption4 = document.querySelector("#activeOption4");
+    var activeOption4Value = document.querySelector("#radio4");
+    var radioQuestions = document.querySelectorAll(".form-check-input");
+
+    //Submit and Display Score Elemenets
+    var submissionResultText = document.querySelector("#submissionResultText");
+    var finalScore = document.querySelector("#finalScore");
+    var initialsInput = document.querySelector("#initialsInput");
+    var highScoresList = document.querySelector("#highScoresList");
+
+    //Quiz Questions Object Array
+    var quizQuestions = [
+        {
+            questionName: "Question 0",
+            questionText: "What do you call a variable that can only have a true or false value?",
+            optionA: "An Array",
+            optionB: "A Boolean",
+            optionC: "A Bi-Conditional Variable",
+            optionD: "A Conditonal Variable",
+            correctOption: "A Boolean"
+        },
+        {
+            questionName: "Question 1",
+            questionText: "What is Bootstrap?",
+            optionA: "A library of javascript",
+            optionB: "A type of CSS Selector",
+            optionC: "A window method used to replace certain CSS classes",
+            optionD: "A library of CSS code accessible via use of pre-defined classes" ,
+            correctOption: "A library of CSS code accessible via use of pre-defined classes" 
+        },
+        {
+            questionName: "Question 2",
+            questionText: "What is Jquery?",
+            optionA: "A library of javascript",
+            optionB: "A type of CSS Selector",
+            optionC: "A window method to replace certain CSS classes",
+            optionD: "A window method used to request data from a database" ,
+            correctOption: "A library of javascript" 
+        },
+        {
+            questionName: "Question 3",
+            questionText: "What is an Array",
+            optionA: "A library of javascript",
+            optionB: "A type of html element attribute",
+            optionC: "A variable that contains multiple values stored to it",
+            optionD: "Just another name for a javascript object ", 
+            correctOption: "A variable that contains multiple values stored to it"
+        },
+        {
+            questionName: "Question 4",
+            questionText: "What type of loop allows you to run code until a certain increment is equal to or exceeding a defined limit?",
+            optionA: "A Do While Loop",
+            optionB: "A While Loop",
+            optionC: "A For Loop",
+            optionD: "An Until Loop",
+            correctOption: "A For Loop" 
+        }
+    ]
    
 //Define Event Listners and Handlers to Trigger Important Functions
 
@@ -97,7 +102,7 @@ var quizQuestions = [
 
     //Submit Answer Button
     submitAnswerButton.addEventListener("click", checkAnswer);
-    
+
     //Submit Score Button
     submitScoreButton.addEventListener("click", logQuizScore);
 
@@ -109,9 +114,9 @@ var quizQuestions = [
 
     //Clear High Scores Button
     clearHighScoresButton.addEventListener("click", clearHighScores);
+    
 
-
-//Define Program Logic & Key Functions
+//Define Program Logic & Functions
 
     //When Page Is initialized...log a message to the console its initialized. This is called via onload attribute in body elemenet of html
     function init() {
