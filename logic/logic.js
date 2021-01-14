@@ -192,7 +192,6 @@ var quizQuestions = [
         }, 1000)
     }
     
-
     //Once Quiz is Started, Render First Quiz Question and Answer Choices (Make Re-Usable Function When Submit Is Clicked)
     function renderQuizQuestion (){
         console.log("renderQuizQuestion() functoin invoked");
